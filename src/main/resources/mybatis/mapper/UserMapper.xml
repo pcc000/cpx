@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.cpx.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.project.cpx.entity.UserEntity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="shop_no" property="shopNo" jdbcType="VARCHAR" />
+    <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
+    <result column="row_status" property="rowStatus" jdbcType="TINYINT" />
+    <result column="row_version" property="rowVersion" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_name, password, shop_no, shop_name, gmt_create, gmt_modify
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    update user set row_status=-1
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.project.cpx.entity.UserEntity" >
+    insert into user (id, user_name, password, shop_no, shop_name
+      gmt_create, gmt_modify, row_status, 
+      row_version)
+    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{shopNo,jdbcType=VARCHAR}, #{shopName,jdbcType=VARCHAR},
+      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, #{rowStatus,jdbcType=TINYINT}, 
+      #{rowVersion,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.project.cpx.entity.UserEntity" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="shopNo != null" >
+        shop_no,
+      </if>
+      <if test="shopName != null" >
+        shop_name,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModify != null" >
+        gmt_modify,
+      </if>
+      <if test="rowStatus != null" >
+        row_status,
+      </if>
+      <if test="rowVersion != null" >
+        row_version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="shopNo != null" >
+        #{shopNo,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null" >
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModify != null" >
+        #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rowStatus != null" >
+        #{rowStatus,jdbcType=TINYINT},
+      </if>
+      <if test="rowVersion != null" >
+        #{rowVersion,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.cpx.entity.UserEntity" >
+    update user
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="shopNo != null" >
+        shop_no = #{shopNo,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null" >
+        shop_name = #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="rowStatus != null" >
+        row_status = #{rowStatus,jdbcType=TINYINT},
+      </if>
+      <if test="rowVersion != null" >
+        row_version = #{rowVersion,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.project.cpx.entity.UserEntity" >
+    update user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      shop_no = #{shopNo,jdbcType=VARCHAR},
+      sho_name = #{shop_name,jdbcType=VARCHAR},
+      row_status = #{rowStatus,jdbcType=TINYINT},
+      row_version = #{rowVersion,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="query" resultMap="BaseResultMap" parameterType="com.project.cpx.entity.UserEntity">
+    select <include refid="Base_Column_List" />
+    from user
+    where row_status =0
+    <if test="userName != null" >
+      and user_name = #{userName,jdbcType=VARCHAR}
+    </if>
+    <if test="shopNo != null" >
+      and shop_no = #{shopNo,jdbcType=VARCHAR}
+    </if>
+    <if test="shopName != null" >
+      and shop_name = #{shopName,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

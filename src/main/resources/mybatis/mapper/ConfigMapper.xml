@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.cpx.dao.ConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.project.cpx.entity.ConfigEntity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="key" property="key" jdbcType="VARCHAR" />
+    <result column="value" property="value" jdbcType="VARCHAR" />
+    <result column="parent_key" property="parentKey" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
+    <result column="row_status" property="rowStatus" jdbcType="TINYINT" />
+    <result column="row_version" property="rowVersion" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, `type`, `key`, `value`, parent_key
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from config
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    update config set row_status=-1
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.project.cpx.entity.ConfigEntity" >
+    insert into config (id, type, key,
+      value, parent_key, remark,
+      gmt_create, gmt_modify, row_status,
+      row_version)
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR},
+      #{value,jdbcType=VARCHAR}, #{parentKey,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, #{rowStatus,jdbcType=TINYINT},
+      #{rowVersion,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.project.cpx.entity.ConfigEntity" >
+    insert into config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="key != null" >
+        key,
+      </if>
+      <if test="value != null" >
+        value,
+      </if>
+      <if test="parentKey != null" >
+        parent_key,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModify != null" >
+        gmt_modify,
+      </if>
+      <if test="rowStatus != null" >
+        row_status,
+      </if>
+      <if test="rowVersion != null" >
+        row_version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="key != null" >
+        #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null" >
+        #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="parentKey != null" >
+        #{parentKey,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModify != null" >
+        #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rowStatus != null" >
+        #{rowStatus,jdbcType=TINYINT},
+      </if>
+      <if test="rowVersion != null" >
+        #{rowVersion,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.cpx.entity.ConfigEntity" >
+    update config
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="key != null" >
+        key = #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null" >
+        value = #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="parentKey != null" >
+        parent_key = #{parentKey,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModify != null" >
+        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rowStatus != null" >
+        row_status = #{rowStatus,jdbcType=TINYINT},
+      </if>
+      <if test="rowVersion != null" >
+        row_version = #{rowVersion,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.project.cpx.entity.ConfigEntity" >
+    update config
+    set type = #{type,jdbcType=VARCHAR},
+      key = #{key,jdbcType=VARCHAR},
+      value = #{value,jdbcType=VARCHAR},
+      parent_key = #{parentKey,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+      row_status = #{rowStatus,jdbcType=TINYINT},
+      row_version = #{rowVersion,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="query" resultMap="BaseResultMap" parameterType="com.project.cpx.entity.ConfigEntity">
+    select <include refid="Base_Column_List" />
+    from config
+    where row_status =0
+    <if test="type != null" >
+      and type = #{type,jdbcType=VARCHAR}
+    </if>
+    <if test="key != null" >
+      and key = #{key,jdbcType=VARCHAR}
+    </if>
+    <if test="value != null" >
+      and value = #{value,jdbcType=VARCHAR}
+    </if>
+    <if test="parentKey != null" >
+      and parent_key = #{parentKey,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+</mapper>
