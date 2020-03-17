@@ -4,7 +4,9 @@ import com.project.cpx.common.util.CheckCondition;
 import com.project.cpx.common.util.ErrorEnum;
 import com.project.cpx.common.util.Response;
 import com.project.cpx.entity.CommonBuilder;
+import com.project.cpx.entity.LoginLogEntity;
 import com.project.cpx.entity.UserEntity;
+import com.project.cpx.service.LoginLogService;
 import com.project.cpx.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
@@ -28,6 +30,9 @@ public class UserController {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private LoginLogService loginLogService;
 
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody
@@ -73,5 +78,17 @@ public class UserController {
         }else{
             return Response.ok(null);
         }
+    }
+
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @ResponseBody
+    public Response<List<UserEntity>> login(@RequestBody UserEntity userEntity){
+        List<UserEntity> resultQueryList = userService.query(userEntity);
+        if(CollectionUtils.isEmpty(resultQueryList)){
+            return Response.fail(ErrorEnum.USER_OR_PASSWORD_IS_NOT_RIGHT);
+        }
+        LoginLogEntity loginLogEntity = CommonBuilder.buildLoginLog(userEntity);
+        loginLogService.add(loginLogEntity);
+        return Response.ok(loginLogEntity);
     }
 }

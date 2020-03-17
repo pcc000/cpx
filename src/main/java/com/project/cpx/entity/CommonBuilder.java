@@ -6,6 +6,7 @@ import sun.security.krb5.Config;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * @Auther: shuyiwei
@@ -34,5 +35,18 @@ public class CommonBuilder {
         feeEntity.setPayAmount(amount.intValue());
         BeanUtils.copyProperties(dto,feeEntity);
         return feeEntity;
+    }
+
+    public static LoginLogEntity buildLoginLog(UserEntity userEntity){
+        LoginLogEntity loginLogEntity = new LoginLogEntity();
+        loginLogEntity.setUserName(userEntity.getUserName());
+        loginLogEntity.setSessionId(UUID.randomUUID().toString());
+        return loginLogEntity;
+    }
+
+    public static LoginLogEntity buildLoginQuery(String sessionId){
+        LoginLogEntity loginLogEntity = new LoginLogEntity();
+        loginLogEntity.setSessionId(sessionId);
+        return loginLogEntity;
     }
 }

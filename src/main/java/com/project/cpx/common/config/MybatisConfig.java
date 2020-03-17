@@ -30,7 +30,6 @@ public class MybatisConfig implements EnvironmentAware {
     private Environment environment;
 
     @Bean(name = "dataSource")
-    //@ConfigurationProperties(prefix = "spring.datasource.base")
     public DataSource dataSource(){
         DruidDataSource dataSource = new DruidDataSource();
         String url = environment.getProperty("spring.dataSource.url");

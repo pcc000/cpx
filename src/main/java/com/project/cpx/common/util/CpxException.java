@@ -5,37 +5,37 @@ package com.project.cpx.common.util;
  * @Date: 2020/2/29 22:56
  * @Description:
  */
-public class Exception extends RuntimeException {
+public class CpxException extends RuntimeException {
 
     private String msg;
     private String code;
 
-    public Exception() {
+    public CpxException() {
     }
 
-    public Exception(String msg) {
+    public CpxException(String msg) {
         super(msg);
         this.msg = msg;
     }
 
-    public Exception(String code, String msg) {
+    public CpxException(String code, String msg) {
         super(msg);
         this.msg = msg;
         this.code = code;
     }
 
-    public Exception(String msg, String code, Throwable e) {
+    public CpxException(String msg, String code, Throwable e) {
         super(msg, e);
         this.code = code;
         this.msg = msg;
     }
 
-    public Exception(String msg, Throwable e) {
+    public CpxException(String msg, Throwable e) {
         super(msg, e);
         this.msg = msg;
     }
 
-    public Exception(Throwable e) {
+    public CpxException(Throwable e) {
         super(e);
     }
 

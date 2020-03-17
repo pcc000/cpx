@@ -11,7 +11,7 @@ public final class CheckCondition {
 
     public static void checkArgument(boolean expression,@Nullable Object... errorArgs){
         if(!expression){
-            throw new Exception(ErrorEnum.PARAM.getCode(),String.format(ErrorEnum.PARAM.getMsg(),errorArgs));
+            throw new CpxException(ErrorEnum.PARAM.getCode(),String.format(ErrorEnum.PARAM.getMsg(),errorArgs));
         }
     }
     public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, @Nullable Object errorArg) {
