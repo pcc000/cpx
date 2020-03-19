@@ -31,8 +31,7 @@ public class CommonBuilder {
     public static FeeEntity buildFeeEntity(FeeDTO dto){
         FeeEntity feeEntity = new FeeEntity();
         feeEntity.setOperateDate(new SimpleDateFormat("yyyyMMdd").format(new Date()));
-        Double amount = dto.getPayAmount()*100;
-        feeEntity.setPayAmount(amount.intValue());
+        feeEntity.setPayAmount(dto.getPayAmount());
         BeanUtils.copyProperties(dto,feeEntity);
         return feeEntity;
     }

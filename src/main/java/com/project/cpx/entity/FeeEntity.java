@@ -1,5 +1,6 @@
 package com.project.cpx.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class FeeEntity {
@@ -9,7 +10,7 @@ public class FeeEntity {
 
     private String operateThing;
 
-    private Integer payAmount;
+    private BigDecimal payAmount;
 
     private String beneficiary;
 
@@ -55,11 +56,12 @@ public class FeeEntity {
         this.operateThing = operateThing == null ? null : operateThing.trim();
     }
 
-    public Integer getPayAmount() {
+
+    public BigDecimal getPayAmount() {
         return payAmount;
     }
 
-    public void setPayAmount(Integer payAmount) {
+    public void setPayAmount(BigDecimal payAmount) {
         this.payAmount = payAmount;
     }
 

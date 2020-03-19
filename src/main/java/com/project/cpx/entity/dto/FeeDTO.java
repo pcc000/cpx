@@ -1,5 +1,7 @@
 package com.project.cpx.entity.dto;
 
+import java.math.BigDecimal;
+
 /**
  * @Auther: shuyiwei
  * @Date: 2020/3/1 20:08
@@ -11,7 +13,7 @@ public class FeeDTO {
 
     private String operateThing;
 
-    private Double payAmount;
+    private BigDecimal payAmount;
 
     private String beneficiary;
 
@@ -41,11 +43,11 @@ public class FeeDTO {
         this.operateThing = operateThing;
     }
 
-    public Double getPayAmount() {
+    public BigDecimal getPayAmount() {
         return payAmount;
     }
 
-    public void setPayAmount(Double payAmount) {
+    public void setPayAmount(BigDecimal payAmount) {
         this.payAmount = payAmount;
     }
 

@@ -1,5 +1,7 @@
 package com.project.cpx.entity.query;
 
+import java.math.BigDecimal;
+
 /**
  * @Auther: shuyiwei
  * @Date: 2020/3/3 19:29
@@ -19,7 +21,7 @@ public class InventoryLogQuery  extends BaseQuery {
 
     private Integer optNum;
 
-    private Integer price;
+    private BigDecimal price;
 
     private String manager;
 
@@ -73,11 +75,11 @@ public class InventoryLogQuery  extends BaseQuery {
         this.optNum = optNum;
     }
 
-    public Integer getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

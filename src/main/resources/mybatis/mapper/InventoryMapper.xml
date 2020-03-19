@@ -8,13 +8,13 @@
     <result column="product_name" property="productName" jdbcType="VARCHAR" />
     <result column="belong" property="belong" jdbcType="VARCHAR" />
     <result column="stock_num" property="stockNum" jdbcType="INTEGER" />
-    <result column="price" property="price" jdbcType="INTEGER" />
+    <result column="price" property="price"/>
     <result column="manager" property="manager" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
     <result column="row_status" property="rowStatus" jdbcType="TINYINT" />
-    <result column="row_version" property="rowVersion" jdbcType="INTEGER" />
+    <result column="row_version" property="rowVersion"/>
   </resultMap>
   <sql id="Base_Column_List" >
     id, operate_date, product_category, product_name, belong, stock_num, price, manager, 
@@ -38,9 +38,9 @@
       row_version)
     values (#{id,jdbcType=INTEGER}, #{operateDate,jdbcType=VARCHAR}, #{productCategory,jdbcType=VARCHAR}, 
       #{productName,jdbcType=VARCHAR}, #{belong,jdbcType=VARCHAR}, #{stockNum,jdbcType=INTEGER}, 
-      #{price,jdbcType=INTEGER}, #{manager,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{price}, #{manager,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
       #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, #{rowStatus,jdbcType=TINYINT}, 
-      #{rowVersion,jdbcType=INTEGER})
+      #{rowVersion})
   </insert>
   <insert id="insertSelective" parameterType="com.project.cpx.entity.InventoryEntity" >
     insert into inventory
@@ -87,7 +87,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+        #{id},
       </if>
       <if test="operateDate != null" >
         #{operateDate,jdbcType=VARCHAR},
@@ -102,10 +102,10 @@
         #{belong,jdbcType=VARCHAR},
       </if>
       <if test="stockNum != null" >
-        #{stockNum,jdbcType=INTEGER},
+        #{stockNum},
       </if>
       <if test="price != null" >
-        #{price,jdbcType=INTEGER},
+        #{price},
       </if>
       <if test="manager != null" >
         #{manager,jdbcType=VARCHAR},
@@ -123,7 +123,7 @@
         #{rowStatus,jdbcType=TINYINT},
       </if>
       <if test="rowVersion != null" >
-        #{rowVersion,jdbcType=INTEGER},
+        #{rowVersion},
       </if>
     </trim>
   </insert>
@@ -143,10 +143,10 @@
         belong = #{belong,jdbcType=VARCHAR},
       </if>
       <if test="stockNum != null" >
-        stock_num = #{stockNum,jdbcType=INTEGER},
+        stock_num = #{stockNum},
       </if>
       <if test="price != null" >
-        price = #{price,jdbcType=INTEGER},
+        price = #{price},
       </if>
       <if test="manager != null" >
         manager = #{manager,jdbcType=VARCHAR},
@@ -164,10 +164,10 @@
         row_status = #{rowStatus,jdbcType=TINYINT},
       </if>
       <if test="rowVersion != null" >
-        row_version = #{rowVersion,jdbcType=INTEGER},
+        row_version = #{rowVersion},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.project.cpx.entity.InventoryEntity" >
     update inventory
@@ -175,15 +175,15 @@
       product_category = #{productCategory,jdbcType=VARCHAR},
       product_name = #{productName,jdbcType=VARCHAR},
       belong = #{belong,jdbcType=VARCHAR},
-      stock_num = #{stockNum,jdbcType=INTEGER},
-      price = #{price,jdbcType=INTEGER},
+      stock_num = #{stockNum},
+      price = #{price},
       manager = #{manager,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
       row_status = #{rowStatus,jdbcType=TINYINT},
-      row_version = #{rowVersion,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+      row_version = #{rowVersion}
+    where id = #{id}
   </update>
 
   <select id="query" resultMap="BaseResultMap" parameterType="com.project.cpx.entity.query.InventoryQuery">
@@ -209,10 +209,10 @@
       and belong = #{belong,jdbcType=VARCHAR}
     </if>
     <if test="stockNum != null" >
-      and stock_num = #{stockNum,jdbcType=INTEGER}
+      and stock_num = #{stockNum}
     </if>
     <if test="price != null" >
-      and price = #{price,jdbcType=INTEGER}
+      and price = #{price}
     </if>
     <if test="manager != null" >
       and manager = #{manager,jdbcType=VARCHAR}
@@ -251,10 +251,10 @@
       and belong = #{belong,jdbcType=VARCHAR}
     </if>
     <if test="stockNum != null" >
-      and stock_num = #{stockNum,jdbcType=INTEGER}
+      and stock_num = #{stockNum}
     </if>
     <if test="price != null" >
-      and price = #{price,jdbcType=INTEGER}
+      and price = #{price}
     </if>
     <if test="manager != null" >
       and manager = #{manager,jdbcType=VARCHAR}

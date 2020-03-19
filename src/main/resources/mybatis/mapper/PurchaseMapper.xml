@@ -8,9 +8,9 @@
     <result column="product_name" property="productName" jdbcType="VARCHAR" />
     <result column="car_type" property="carType" jdbcType="VARCHAR" />
     <result column="belong" property="belong" jdbcType="VARCHAR" />
-    <result column="price" property="price" jdbcType="INTEGER" />
-    <result column="num" property="num" jdbcType="INTEGER" />
-    <result column="total_price" property="totalPrice" jdbcType="INTEGER" />
+    <result column="price" property="price"/>
+    <result column="num" property="num"/>
+    <result column="total_price" property="totalPrice"/>
     <result column="manager" property="manager" jdbcType="VARCHAR" />
     <result column="supplier_company_name" property="supplierCompanyName" jdbcType="VARCHAR" />
     <result column="supplier_phone" property="supplierPhone" jdbcType="VARCHAR" />
@@ -20,7 +20,7 @@
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
     <result column="row_status" property="rowStatus" jdbcType="TINYINT" />
-    <result column="row_version" property="rowVersion" jdbcType="INTEGER" />
+    <result column="row_version" property="rowVersion"/>
   </resultMap>
   <sql id="Base_Column_List" >
     id, operate_date, product_category, product_name, car_type, belong, price, num, total_price, manager, supplier_company_name,
@@ -60,11 +60,11 @@
       row_status, row_version)
     values (#{id,jdbcType=INTEGER}, #{operateDate,jdbcType=VARCHAR}, #{productCategory,jdbcType=VARCHAR},
       #{productName,jdbcType=VARCHAR},
-      #{carType,jdbcType=VARCHAR}, #{belong,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, #{num,jdbcType=INTEGER},
-      #{totalPrice,jdbcType=INTEGER}, #{manager,jdbcType=VARCHAR}, #{supplierCompanyName,jdbcType=VARCHAR}, 
+      #{carType,jdbcType=VARCHAR}, #{belong,jdbcType=VARCHAR}, #{price}, #{num},
+      #{totalPrice}, #{manager,jdbcType=VARCHAR}, #{supplierCompanyName,jdbcType=VARCHAR},
       #{supplierPhone,jdbcType=VARCHAR}, #{supplierPerson,jdbcType=VARCHAR}, #{isPaid,jdbcType=VARCHAR}, 
       #{remark,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, 
-      #{rowStatus,jdbcType=TINYINT}, #{rowVersion,jdbcType=INTEGER})
+      #{rowStatus,jdbcType=TINYINT}, #{rowVersion})
   </insert>
   <insert id="insertSelective" parameterType="com.project.cpx.entity.PurchaseEntity" >
     insert into purchase
@@ -129,7 +129,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+        #{id},
       </if>
       <if test="operateDate != null" >
         #{operateDate,jdbcType=VARCHAR},
@@ -147,13 +147,13 @@
         #{belong,jdbcType=VARCHAR},
       </if>
       <if test="price != null" >
-        #{price,jdbcType=INTEGER},
+        #{price},
       </if>
       <if test="num != null" >
-        #{num,jdbcType=INTEGER},
+        #{num},
       </if>
       <if test="totalPrice != null" >
-        #{totalPrice,jdbcType=INTEGER},
+        #{totalPrice},
       </if>
       <if test="manager != null" >
         #{manager,jdbcType=VARCHAR},
@@ -183,7 +183,7 @@
         #{rowStatus,jdbcType=TINYINT},
       </if>
       <if test="rowVersion != null" >
-        #{rowVersion,jdbcType=INTEGER},
+        #{rowVersion},
       </if>
     </trim>
   </insert>
@@ -206,13 +206,13 @@
         belong = #{belong,jdbcType=VARCHAR},
       </if>
       <if test="price != null" >
-        price = #{price,jdbcType=INTEGER},
+        price = #{price},
       </if>
       <if test="num != null" >
-        num = #{num,jdbcType=INTEGER},
+        num = #{num},
       </if>
       <if test="totalPrice != null" >
-        total_price = #{totalPrice,jdbcType=INTEGER},
+        total_price = #{totalPrice},
       </if>
       <if test="manager != null" >
         manager = #{manager,jdbcType=VARCHAR},
@@ -242,10 +242,10 @@
         row_status = #{rowStatus,jdbcType=TINYINT},
       </if>
       <if test="rowVersion != null" >
-        row_version = #{rowVersion,jdbcType=INTEGER},
+        row_version = #{rowVersion},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.project.cpx.entity.PurchaseEntity" >
     update purchase
@@ -254,9 +254,9 @@
       product_name = #{productName,jdbcType=VARCHAR},
       car_type = #{carType,jdbcType=VARCHAR},
       belong = #{belong,jdbcType=VARCHAR},
-      price = #{price,jdbcType=INTEGER},
-      num = #{num,jdbcType=INTEGER},
-      total_price = #{totalPrice,jdbcType=INTEGER},
+      price = #{price},
+      num = #{num},
+      total_price = #{totalPrice},
       manager = #{manager,jdbcType=VARCHAR},
       supplier_company_name = #{supplierCompanyName,jdbcType=VARCHAR},
       supplier_phone = #{supplierPhone,jdbcType=VARCHAR},
@@ -266,8 +266,8 @@
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
       row_status = #{rowStatus,jdbcType=TINYINT},
-      row_version = #{rowVersion,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+      row_version = #{rowVersion}
+    where id = #{id}
   </update>
 
   <select id="query" resultMap="BaseResultMap" parameterType="com.project.cpx.entity.query.PurchaseQuery">

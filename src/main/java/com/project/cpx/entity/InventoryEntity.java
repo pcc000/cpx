@@ -1,5 +1,6 @@
 package com.project.cpx.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class InventoryEntity {
@@ -15,7 +16,7 @@ public class InventoryEntity {
 
     private Integer stockNum;
 
-    private Integer price;
+    private BigDecimal price;
 
     private String manager;
 
@@ -77,11 +78,11 @@ public class InventoryEntity {
         this.stockNum = stockNum;
     }
 
-    public Integer getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

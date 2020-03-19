@@ -5,7 +5,7 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="operate_date" property="operateDate" jdbcType="VARCHAR" />
     <result column="operate_thing" property="operateThing" jdbcType="VARCHAR" />
-    <result column="pay_amount" property="payAmount" jdbcType="INTEGER" />
+    <result column="pay_amount" property="payAmount"/>
     <result column="beneficiary" property="beneficiary" jdbcType="VARCHAR" />
     <result column="pay_type" property="payType" jdbcType="VARCHAR" />
     <result column="fee_type" property="feeType" jdbcType="VARCHAR" />
@@ -15,7 +15,7 @@
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
     <result column="row_status" property="rowStatus" jdbcType="TINYINT" />
-    <result column="row_version" property="rowVersion" jdbcType="INTEGER" />
+    <result column="row_version" property="rowVersion"/>
   </resultMap>
 
   <resultMap id="operateThingResult" type="java.lang.String" >
@@ -51,10 +51,10 @@
       remark, gmt_create, gmt_modify, 
       row_status, row_version)
     values (#{id,jdbcType=INTEGER}, #{operateDate,jdbcType=VARCHAR}, #{operateThing,jdbcType=VARCHAR}, 
-      #{payAmount,jdbcType=INTEGER}, #{beneficiary,jdbcType=VARCHAR}, #{payType,jdbcType=VARCHAR}, 
+      #{payAmount}, #{beneficiary,jdbcType=VARCHAR}, #{payType,jdbcType=VARCHAR},
       #{feeType,jdbcType=VARCHAR}, #{belong,jdbcType=VARCHAR}, #{payer,jdbcType=VARCHAR}, 
       #{remark,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, 
-      #{rowStatus,jdbcType=TINYINT}, #{rowVersion,jdbcType=INTEGER})
+      #{rowStatus,jdbcType=TINYINT}, #{rowVersion})
   </insert>
   <insert id="insertSelective" parameterType="com.project.cpx.entity.FeeEntity" >
     insert into fee
@@ -104,7 +104,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+        #{id},
       </if>
       <if test="operateDate != null" >
         #{operateDate,jdbcType=VARCHAR},
@@ -113,7 +113,7 @@
         #{operateThing,jdbcType=VARCHAR},
       </if>
       <if test="payAmount != null" >
-        #{payAmount,jdbcType=INTEGER},
+        #{payAmount},
       </if>
       <if test="beneficiary != null" >
         #{beneficiary,jdbcType=VARCHAR},
@@ -143,7 +143,7 @@
         #{rowStatus,jdbcType=TINYINT},
       </if>
       <if test="rowVersion != null" >
-        #{rowVersion,jdbcType=INTEGER},
+        #{rowVersion},
       </if>
     </trim>
   </insert>
@@ -157,7 +157,7 @@
         operate_thing = #{operateThing,jdbcType=VARCHAR},
       </if>
       <if test="payAmount != null" >
-        pay_amount = #{payAmount,jdbcType=INTEGER},
+        pay_amount = #{payAmount},
       </if>
       <if test="beneficiary != null" >
         beneficiary = #{beneficiary,jdbcType=VARCHAR},
@@ -187,16 +187,16 @@
         row_status = #{rowStatus,jdbcType=TINYINT},
       </if>
       <if test="rowVersion != null" >
-        row_version = #{rowVersion,jdbcType=INTEGER},
+        row_version = #{rowVersion},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.project.cpx.entity.FeeEntity" >
     update fee
     set operate_date = #{operateDate,jdbcType=VARCHAR},
       operate_thing = #{operateThing,jdbcType=VARCHAR},
-      pay_amount = #{payAmount,jdbcType=INTEGER},
+      pay_amount = #{payAmount},
       beneficiary = #{beneficiary,jdbcType=VARCHAR},
       pay_type = #{payType,jdbcType=VARCHAR},
       fee_type = #{feeType,jdbcType=VARCHAR},
@@ -206,8 +206,8 @@
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
       row_status = #{rowStatus,jdbcType=TINYINT},
-      row_version = #{rowVersion,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+      row_version = #{rowVersion}
+    where id = #{id}
   </update>
 
   <select id="query" resultMap="BaseResultMap" parameterType="com.project.cpx.entity.query.FeeQuery">

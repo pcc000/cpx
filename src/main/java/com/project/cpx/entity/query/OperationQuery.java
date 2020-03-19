@@ -1,5 +1,7 @@
 package com.project.cpx.entity.query;
 
+import java.math.BigDecimal;
+
 /**
  * @Auther: shuyiwei
  * @Date: 2020/3/3 19:28
@@ -15,21 +17,21 @@ public class OperationQuery  extends BaseQuery {
 
     private String belong;
 
-    private Integer salePrice;
+    private BigDecimal salePrice;
 
     private Integer saleNum;
 
-    private Integer saleTotalPrice;
+    private BigDecimal saleTotalPrice;
 
     private Integer rebateNum;
 
     private Integer unRebateNum;
 
-    private Integer actualPrice;
+    private BigDecimal actualPrice;
 
-    private Integer price;
+    private BigDecimal price;
 
-    private Integer constructPrice;
+    private BigDecimal constructPrice;
 
     private String constructPreson;
 
@@ -87,11 +89,11 @@ public class OperationQuery  extends BaseQuery {
         this.belong = belong;
     }
 
-    public Integer getSalePrice() {
+    public BigDecimal getSalePrice() {
         return salePrice;
     }
 
-    public void setSalePrice(Integer salePrice) {
+    public void setSalePrice(BigDecimal salePrice) {
         this.salePrice = salePrice;
     }
 
@@ -103,11 +105,11 @@ public class OperationQuery  extends BaseQuery {
         this.saleNum = saleNum;
     }
 
-    public Integer getSaleTotalPrice() {
+    public BigDecimal getSaleTotalPrice() {
         return saleTotalPrice;
     }
 
-    public void setSaleTotalPrice(Integer saleTotalPrice) {
+    public void setSaleTotalPrice(BigDecimal saleTotalPrice) {
         this.saleTotalPrice = saleTotalPrice;
     }
 
@@ -127,27 +129,27 @@ public class OperationQuery  extends BaseQuery {
         this.unRebateNum = unRebateNum;
     }
 
-    public Integer getActualPrice() {
+    public BigDecimal getActualPrice() {
         return actualPrice;
     }
 
-    public void setActualPrice(Integer actualPrice) {
+    public void setActualPrice(BigDecimal actualPrice) {
         this.actualPrice = actualPrice;
     }
 
-    public Integer getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public Integer getConstructPrice() {
+    public BigDecimal getConstructPrice() {
         return constructPrice;
     }
 
-    public void setConstructPrice(Integer constructPrice) {
+    public void setConstructPrice(BigDecimal constructPrice) {
         this.constructPrice = constructPrice;
     }
 

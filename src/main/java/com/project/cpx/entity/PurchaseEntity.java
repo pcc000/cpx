@@ -1,5 +1,6 @@
 package com.project.cpx.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class PurchaseEntity {
@@ -15,11 +16,11 @@ public class PurchaseEntity {
 
     private String belong;
 
-    private Integer price;
+    private BigDecimal price;
 
     private Integer num;
 
-    private Integer totalPrice;
+    private BigDecimal totalPrice;
 
     private String manager;
 
@@ -73,13 +74,6 @@ public class PurchaseEntity {
         this.carType = carType == null ? null : carType.trim();
     }
 
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
 
     public Integer getNum() {
         return num;
@@ -89,11 +83,19 @@ public class PurchaseEntity {
         this.num = num;
     }
 
-    public Integer getTotalPrice() {
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(Integer totalPrice) {
+    public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
 
