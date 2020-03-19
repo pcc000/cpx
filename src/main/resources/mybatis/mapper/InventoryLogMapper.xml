@@ -7,6 +7,7 @@
     <result column="operate_date" property="operateDate" jdbcType="VARCHAR" />
     <result column="product_category" property="productCategory" jdbcType="VARCHAR" />
     <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="car_type" property="carType" />
     <result column="belong" property="belong" jdbcType="VARCHAR" />
     <result column="opt_num" property="optNum" jdbcType="INTEGER" />
     <result column="price" property="price"/>
@@ -19,7 +20,7 @@
     <result column="row_version" property="rowVersion"/>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, bill_no, operate_date, product_category, product_name, belong, opt_num, price, 
+    id, bill_no, operate_date, product_category, product_name,car_type, belong, opt_num, price,
     manager, is_used, remark, gmt_create, gmt_modify, row_status, row_version
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -34,13 +35,13 @@
   </delete>
   <insert id="insert" parameterType="com.project.cpx.entity.InventoryLogEntity" >
     insert into inventory_log (id, bill_no, operate_date, 
-      product_category, product_name, belong, 
+      product_category, product_name,car_type, belong,
       opt_num, price, manager, 
       is_used, remark, gmt_create, 
       gmt_modify, row_status, row_version
       )
     values (#{id,jdbcType=INTEGER}, #{billNo,jdbcType=VARCHAR}, #{operateDate,jdbcType=VARCHAR}, 
-      #{productCategory,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, #{belong,jdbcType=VARCHAR}, 
+      #{productCategory,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR},           #{carType,jdbcType=VARCHAR}, #{belong,jdbcType=VARCHAR},
       #{optNum,jdbcType=INTEGER}, #{price}, #{manager,jdbcType=VARCHAR},
       #{isUsed,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
       #{gmtModify,jdbcType=TIMESTAMP}, #{rowStatus,jdbcType=TINYINT}, #{rowVersion}
@@ -63,6 +64,9 @@
       </if>
       <if test="productName != null" >
         product_name,
+      </if>
+      <if test="carType != null" >
+        car_type,
       </if>
       <if test="belong != null" >
         belong,
@@ -111,6 +115,9 @@
       <if test="productName != null" >
         #{productName,jdbcType=VARCHAR},
       </if>
+      <if test="carType != null" >
+        #{carType,jdbcType=VARCHAR},
+      </if>
       <if test="belong != null" >
         #{belong,jdbcType=VARCHAR},
       </if>
@@ -158,6 +165,9 @@
       <if test="productName != null" >
         product_name = #{productName,jdbcType=VARCHAR},
       </if>
+      <if test="carType != null" >
+        car_type = #{carType,jdbcType=VARCHAR},
+      </if>
       <if test="belong != null" >
         belong = #{belong,jdbcType=VARCHAR},
       </if>
@@ -176,12 +186,6 @@
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="gmtCreate != null" >
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModify != null" >
-        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
-      </if>
       <if test="rowStatus != null" >
         row_status = #{rowStatus,jdbcType=TINYINT},
       </if>
@@ -197,14 +201,13 @@
       operate_date = #{operateDate,jdbcType=VARCHAR},
       product_category = #{productCategory,jdbcType=VARCHAR},
       product_name = #{productName,jdbcType=VARCHAR},
+      car_type = #{carType,jdbcType=VARCHAR},
       belong = #{belong,jdbcType=VARCHAR},
       opt_num = #{optNum},
       price = #{price},
       manager = #{manager,jdbcType=VARCHAR},
       is_used = #{isUsed,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
       row_status = #{rowStatus,jdbcType=TINYINT},
       row_version = #{rowVersion}
     where id = #{id}
@@ -231,6 +234,9 @@
     </if>
     <if test="productName != null" >
       and product_name = #{productName,jdbcType=VARCHAR}
+    </if>
+    <if test="carType != null" >
+      and car_type = #{carType,jdbcType=VARCHAR}
     </if>
     <if test="belong != null" >
       and belong = #{belong,jdbcType=VARCHAR}
@@ -279,6 +285,9 @@
     </if>
     <if test="productName != null" >
       and product_name = #{productName,jdbcType=VARCHAR}
+    </if>
+    <if test="carType != null" >
+      and car_type = #{carType,jdbcType=VARCHAR}
     </if>
     <if test="belong != null" >
       and belong = #{belong,jdbcType=VARCHAR}

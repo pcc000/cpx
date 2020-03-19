@@ -2,6 +2,7 @@ package com.project.cpx.service.impl;
 
 import com.project.cpx.dao.InventoryLogMapper;
 import com.project.cpx.dao.InventoryMapper;
+import com.project.cpx.entity.CommonBuilder;
 import com.project.cpx.entity.FeeEntity;
 import com.project.cpx.entity.InventoryEntity;
 import com.project.cpx.entity.InventoryLogEntity;
@@ -84,5 +85,21 @@ public class InventoryServiceImpl implements InventoryService {
             query.setTotalRecored(count);
         }
         return  resultList;
+    }
+
+    @Override
+    public synchronized int addInventory(InventoryEntity entity) {
+        InventoryQuery query = CommonBuilder.buildAddQuery(entity);
+        List<InventoryEntity> inventoryList = inventoryMapper.query(query);
+        InventoryLogEntity log = CommonBuilder.addLog(entity);
+        inventoryLogMapper.insertSelective(log);
+        if(CollectionUtils.isEmpty(inventoryList)){
+            inventoryMapper.insertSelective(entity);
+        }else{
+            InventoryEntity inventoryEntity = inventoryList.get(0);
+            inventoryEntity.setStockNum(inventoryEntity.getStockNum()+entity.getStockNum());
+            inventoryMapper.updateByPrimaryKeySelective(inventoryEntity);
+        }
+        return 1;
     }
 }

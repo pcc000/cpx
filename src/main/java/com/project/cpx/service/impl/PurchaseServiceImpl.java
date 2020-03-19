@@ -1,8 +1,11 @@
 package com.project.cpx.service.impl;
 
 import com.project.cpx.dao.PurchaseMapper;
+import com.project.cpx.entity.CommonBuilder;
+import com.project.cpx.entity.InventoryEntity;
 import com.project.cpx.entity.PurchaseEntity;
 import com.project.cpx.entity.query.PurchaseQuery;
+import com.project.cpx.service.InventoryService;
 import com.project.cpx.service.PurchaseService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -22,9 +25,17 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Resource
     private PurchaseMapper purchaseMapper;
 
+    @Resource
+    private InventoryService inventoryService;
+
     @Override
     public int add(PurchaseEntity entity) {
-        return purchaseMapper.insertSelective(entity);
+        int result = purchaseMapper.insertSelective(entity);
+        if(result >0){
+            InventoryEntity inventoryEntity = CommonBuilder.buildInventoyByPurchase(entity);
+            inventoryService.addInventory(inventoryEntity);
+        }
+        return result;
     }
 
     @Override

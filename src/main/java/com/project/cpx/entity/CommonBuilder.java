@@ -1,6 +1,8 @@
 package com.project.cpx.entity;
 
+import com.project.cpx.common.util.Constant;
 import com.project.cpx.entity.dto.FeeDTO;
+import com.project.cpx.entity.query.InventoryQuery;
 import org.springframework.beans.BeanUtils;
 import sun.security.krb5.Config;
 
@@ -30,7 +32,7 @@ public class CommonBuilder {
 
     public static FeeEntity buildFeeEntity(FeeDTO dto){
         FeeEntity feeEntity = new FeeEntity();
-        feeEntity.setOperateDate(new SimpleDateFormat("yyyyMMdd").format(new Date()));
+        feeEntity.setOperateDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         feeEntity.setPayAmount(dto.getPayAmount());
         BeanUtils.copyProperties(dto,feeEntity);
         return feeEntity;
@@ -47,5 +49,43 @@ public class CommonBuilder {
         LoginLogEntity loginLogEntity = new LoginLogEntity();
         loginLogEntity.setSessionId(sessionId);
         return loginLogEntity;
+    }
+
+    public static InventoryQuery buildAddQuery(InventoryEntity entity){
+        InventoryQuery query = new InventoryQuery();
+        query.setBelong(entity.getBelong());
+        query.setProductCategory(entity.getProductCategory());
+        query.setProductName(entity.getProductName());
+        query.setPrice(entity.getPrice());
+        query.setCarType(entity.getCarType());
+        return query;
+    }
+
+    public static InventoryLogEntity addLog(InventoryEntity entity){
+        InventoryLogEntity log = new InventoryLogEntity();
+        log.setOperateDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        log.setBelong(entity.getBelong());
+        log.setBillNo(entity.getBillNo());
+        log.setCarType(entity.getCarType());
+        log.setManager(entity.getManager());
+        log.setOptNum(entity.getStockNum());
+        log.setPrice(entity.getPrice());
+        log.setProductCategory(entity.getProductCategory());
+        log.setProductName(entity.getProductName());
+        log.setIsUsed(Constant.INVENTORY_IS_USED_0);
+        return log;
+    }
+
+    public static InventoryEntity buildInventoyByPurchase(PurchaseEntity entity) {
+        InventoryEntity inventoryEntity = new InventoryEntity();
+        inventoryEntity.setOperateDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        inventoryEntity.setStockNum(entity.getNum());
+        inventoryEntity.setBelong(entity.getBelong());
+        inventoryEntity.setProductName(entity.getProductName());
+        inventoryEntity.setProductCategory(entity.getProductCategory());
+        inventoryEntity.setPrice(entity.getPrice());
+        inventoryEntity.setBillNo("P"+entity.getId());
+        inventoryEntity.setCarType(entity.getCarType());
+        return inventoryEntity;
     }
 }

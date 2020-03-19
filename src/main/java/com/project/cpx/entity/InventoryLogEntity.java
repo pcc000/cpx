@@ -14,6 +14,8 @@ public class InventoryLogEntity {
 
     private String productName;
 
+    private String carType;
+
     private String belong;
 
     private Integer optNum;
@@ -152,5 +154,13 @@ public class InventoryLogEntity {
 
     public void setRowVersion(Integer rowVersion) {
         this.rowVersion = rowVersion;
+    }
+
+    public String getCarType() {
+        return carType;
+    }
+
+    public void setCarType(String carType) {
+        this.carType = carType;
     }
 }

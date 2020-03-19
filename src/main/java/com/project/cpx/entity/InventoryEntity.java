@@ -6,11 +6,15 @@ import java.util.Date;
 public class InventoryEntity {
     private Integer id;
 
+    private String billNo;
+
     private String operateDate;
 
     private String productCategory;
 
     private String productName;
+
+    private String carType;
 
     private String belong;
 
@@ -132,5 +136,21 @@ public class InventoryEntity {
 
     public void setRowVersion(Integer rowVersion) {
         this.rowVersion = rowVersion;
+    }
+
+    public String getBillNo() {
+        return billNo;
+    }
+
+    public void setBillNo(String billNo) {
+        this.billNo = billNo;
+    }
+
+    public String getCarType() {
+        return carType;
+    }
+
+    public void setCarType(String carType) {
+        this.carType = carType;
     }
 }

@@ -17,6 +17,8 @@ public class InventoryLogQuery  extends BaseQuery {
 
     private String productName;
 
+    private String carType;
+
     private String belong;
 
     private Integer optNum;
@@ -97,5 +99,13 @@ public class InventoryLogQuery  extends BaseQuery {
 
     public void setIsUsed(String isUsed) {
         this.isUsed = isUsed;
+    }
+
+    public String getCarType() {
+        return carType;
+    }
+
+    public void setCarType(String carType) {
+        this.carType = carType;
     }
 }

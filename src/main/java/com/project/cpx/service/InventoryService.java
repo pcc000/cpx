@@ -30,4 +30,6 @@ public interface InventoryService {
     int deleteInventoryLogById(Integer id);
 
     List<InventoryLogEntity> query(InventoryLogQuery query);
+
+    int addInventory(InventoryEntity entity);
 }

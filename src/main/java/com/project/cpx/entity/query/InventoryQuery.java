@@ -15,6 +15,8 @@ public class InventoryQuery  extends BaseQuery {
 
     private String productName;
 
+    private String carType;
+
     private String belong;
 
     private Integer stockNum;
@@ -77,5 +79,13 @@ public class InventoryQuery  extends BaseQuery {
 
     public void setManager(String manager) {
         this.manager = manager;
+    }
+
+    public String getCarType() {
+        return carType;
+    }
+
+    public void setCarType(String carType) {
+        this.carType = carType;
     }
 }

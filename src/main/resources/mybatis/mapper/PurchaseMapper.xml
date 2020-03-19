@@ -66,7 +66,7 @@
       #{remark,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, 
       #{rowStatus,jdbcType=TINYINT}, #{rowVersion})
   </insert>
-  <insert id="insertSelective" parameterType="com.project.cpx.entity.PurchaseEntity" >
+  <insert id="insertSelective" parameterType="com.project.cpx.entity.PurchaseEntity" useGeneratedKeys="true" keyProperty="id">
     insert into purchase
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -232,12 +232,6 @@
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="gmtCreate != null" >
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModify != null" >
-        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
-      </if>
       <if test="rowStatus != null" >
         row_status = #{rowStatus,jdbcType=TINYINT},
       </if>
@@ -263,8 +257,6 @@
       supplier_person = #{supplierPerson,jdbcType=VARCHAR},
       is_paid = #{isPaid,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
       row_status = #{rowStatus,jdbcType=TINYINT},
       row_version = #{rowVersion}
     where id = #{id}

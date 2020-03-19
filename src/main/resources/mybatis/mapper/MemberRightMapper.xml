@@ -122,12 +122,6 @@
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="gmtCreate != null" >
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModify != null" >
-        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
-      </if>
       <if test="rowStatus != null" >
         row_status = #{rowStatus,jdbcType=TINYINT},
       </if>
@@ -144,8 +138,6 @@
       right_content = #{rightContent,jdbcType=VARCHAR},
       num = #{num,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
       row_status = #{rowStatus,jdbcType=TINYINT},
       row_version = #{rowVersion,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
