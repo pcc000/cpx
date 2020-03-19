@@ -153,7 +153,7 @@
       and key = #{key,jdbcType=VARCHAR}
     </if>
     <if test="value != null" >
-      and value = #{value,jdbcType=VARCHAR}
+      and value = CONCAT('%',#{value},'%')
     </if>
     <if test="parentKey != null" >
       and parent_key = #{parentKey,jdbcType=VARCHAR}
