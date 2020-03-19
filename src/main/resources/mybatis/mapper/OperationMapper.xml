@@ -7,14 +7,14 @@
     <result column="product_category" property="productCategory" jdbcType="VARCHAR" />
     <result column="product_name" property="productName" jdbcType="VARCHAR" />
     <result column="belong" property="belong" jdbcType="VARCHAR" />
-    <result column="sale_price" property="salePrice" jdbcType="INTEGER" />
+    <result column="sale_price" property="salePrice" />
     <result column="sale_num" property="saleNum" jdbcType="INTEGER" />
-    <result column="sale_total_price" property="saleTotalPrice" jdbcType="INTEGER" />
+    <result column="sale_total_price" property="saleTotalPrice"/>
     <result column="rebate_num" property="rebateNum" jdbcType="INTEGER" />
     <result column="un_rebate_num" property="unRebateNum" jdbcType="INTEGER" />
-    <result column="actual_price" property="actualPrice" jdbcType="INTEGER" />
-    <result column="price" property="price" jdbcType="INTEGER" />
-    <result column="construct_price" property="constructPrice" jdbcType="INTEGER" />
+    <result column="actual_price" property="actualPrice" />
+    <result column="price" property="price"/>
+    <result column="construct_price" property="constructPrice" />
     <result column="construct_preson" property="constructPreson" jdbcType="VARCHAR" />
     <result column="sales_commission" property="salesCommission" jdbcType="INTEGER" />
     <result column="sales_rate" property="salesRate" jdbcType="INTEGER" />
@@ -185,37 +185,37 @@
         #{belong,jdbcType=VARCHAR},
       </if>
       <if test="salePrice != null" >
-        #{salePrice,jdbcType=INTEGER},
+        #{salePrice},
       </if>
       <if test="saleNum != null" >
-        #{saleNum,jdbcType=INTEGER},
+        #{saleNum},
       </if>
       <if test="saleTotalPrice != null" >
-        #{saleTotalPrice,jdbcType=INTEGER},
+        #{saleTotalPrice},
       </if>
       <if test="rebateNum != null" >
-        #{rebateNum,jdbcType=INTEGER},
+        #{rebateNum},
       </if>
       <if test="unRebateNum != null" >
-        #{unRebateNum,jdbcType=INTEGER},
+        #{unRebateNum},
       </if>
       <if test="actualPrice != null" >
-        #{actualPrice,jdbcType=INTEGER},
+        #{actualPrice},
       </if>
       <if test="price != null" >
-        #{price,jdbcType=INTEGER},
+        #{price},
       </if>
       <if test="constructPrice != null" >
-        #{constructPrice,jdbcType=INTEGER},
+        #{constructPrice},
       </if>
       <if test="constructPreson != null" >
         #{constructPreson,jdbcType=VARCHAR},
       </if>
       <if test="salesCommission != null" >
-        #{salesCommission,jdbcType=INTEGER},
+        #{salesCommission},
       </if>
       <if test="salesRate != null" >
-        #{salesRate,jdbcType=INTEGER},
+        #{salesRate},
       </if>
       <if test="sales != null" >
         #{sales,jdbcType=VARCHAR},
@@ -257,7 +257,7 @@
         #{rowStatus,jdbcType=TINYINT},
       </if>
       <if test="rowVersion != null" >
-        #{rowVersion,jdbcType=INTEGER},
+        #{rowVersion},
       </if>
     </trim>
   </insert>
@@ -277,37 +277,37 @@
         belong = #{belong,jdbcType=VARCHAR},
       </if>
       <if test="salePrice != null" >
-        sale_price = #{salePrice,jdbcType=INTEGER},
+        sale_price = #{salePrice},
       </if>
       <if test="saleNum != null" >
-        sale_num = #{saleNum,jdbcType=INTEGER},
+        sale_num = #{saleNum},
       </if>
       <if test="saleTotalPrice != null" >
-        sale_total_price = #{saleTotalPrice,jdbcType=INTEGER},
+        sale_total_price = #{saleTotalPrice},
       </if>
       <if test="rebateNum != null" >
-        rebate_num = #{rebateNum,jdbcType=INTEGER},
+        rebate_num = #{rebateNum},
       </if>
       <if test="unRebateNum != null" >
-        un_rebate_num = #{unRebateNum,jdbcType=INTEGER},
+        un_rebate_num = #{unRebateNum},
       </if>
       <if test="actualPrice != null" >
-        actual_price = #{actualPrice,jdbcType=INTEGER},
+        actual_price = #{actualPrice},
       </if>
       <if test="price != null" >
-        price = #{price,jdbcType=INTEGER},
+        price = #{price},
       </if>
       <if test="constructPrice != null" >
-        construct_price = #{constructPrice,jdbcType=INTEGER},
+        construct_price = #{constructPrice},
       </if>
       <if test="constructPreson != null" >
         construct_preson = #{constructPreson,jdbcType=VARCHAR},
       </if>
       <if test="salesCommission != null" >
-        sales_commission = #{salesCommission,jdbcType=INTEGER},
+        sales_commission = #{salesCommission},
       </if>
       <if test="salesRate != null" >
-        sales_rate = #{salesRate,jdbcType=INTEGER},
+        sales_rate = #{salesRate},
       </if>
       <if test="sales != null" >
         sales = #{sales,jdbcType=VARCHAR},
@@ -349,10 +349,10 @@
         row_status = #{rowStatus,jdbcType=TINYINT},
       </if>
       <if test="rowVersion != null" >
-        row_version = #{rowVersion,jdbcType=INTEGER},
+        row_version = #{rowVersion},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.project.cpx.entity.OperationEntity" >
     update operation
@@ -360,17 +360,17 @@
       product_category = #{productCategory,jdbcType=VARCHAR},
       product_name = #{productName,jdbcType=VARCHAR},
       belong = #{belong,jdbcType=VARCHAR},
-      sale_price = #{salePrice,jdbcType=INTEGER},
-      sale_num = #{saleNum,jdbcType=INTEGER},
-      sale_total_price = #{saleTotalPrice,jdbcType=INTEGER},
-      rebate_num = #{rebateNum,jdbcType=INTEGER},
-      un_rebate_num = #{unRebateNum,jdbcType=INTEGER},
-      actual_price = #{actualPrice,jdbcType=INTEGER},
-      price = #{price,jdbcType=INTEGER},
-      construct_price = #{constructPrice,jdbcType=INTEGER},
+      sale_price = #{salePrice},
+      sale_num = #{saleNum},
+      sale_total_price = #{saleTotalPrice},
+      rebate_num = #{rebateNum},
+      un_rebate_num = #{unRebateNum},
+      actual_price = #{actualPrice},
+      price = #{price},
+      construct_price = #{constructPrice},
       construct_preson = #{constructPreson,jdbcType=VARCHAR},
-      sales_commission = #{salesCommission,jdbcType=INTEGER},
-      sales_rate = #{salesRate,jdbcType=INTEGER},
+      sales_commission = #{salesCommission},
+      sales_rate = #{salesRate},
       sales = #{sales,jdbcType=VARCHAR},
       collection_type = #{collectionType,jdbcType=VARCHAR},
       partner_company_name = #{partnerCompanyName,jdbcType=VARCHAR},
@@ -384,8 +384,8 @@
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
       row_status = #{rowStatus,jdbcType=TINYINT},
-      row_version = #{rowVersion,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+      row_version = #{rowVersion}
+    where id = #{id}
   </update>
 
   <select id="query" resultMap="BaseResultMap" parameterType="com.project.cpx.entity.query.OperationQuery">
@@ -411,37 +411,37 @@
       and belong = #{belong,jdbcType=VARCHAR}
     </if>
     <if test="salePrice != null" >
-      and sale_price = #{salePrice,jdbcType=INTEGER}
+      and sale_price = #{salePrice}
     </if>
     <if test="saleNum != null" >
-      and sale_num = #{saleNum,jdbcType=INTEGER}
+      and sale_num = #{saleNum}
     </if>
     <if test="saleTotalPrice != null" >
-      and sale_total_price = #{saleTotalPrice,jdbcType=INTEGER}
+      and sale_total_price = #{saleTotalPrice}
     </if>
     <if test="rebateNum != null" >
-      and rebate_num = #{rebateNum,jdbcType=INTEGER}
+      and rebate_num = #{rebateNum}
     </if>
     <if test="unRebateNum != null" >
-      and un_rebate_num = #{unRebateNum,jdbcType=INTEGER}
+      and un_rebate_num = #{unRebateNum}
     </if>
     <if test="actualPrice != null" >
-      and actual_price = #{actualPrice,jdbcType=INTEGER}
+      and actual_price = #{actualPrice}
     </if>
     <if test="price != null" >
-      and price = #{price,jdbcType=INTEGER}
+      and price = #{price}
     </if>
     <if test="constructPrice != null" >
-      and construct_price = #{constructPrice,jdbcType=INTEGER}
+      and construct_price = #{constructPrice}
     </if>
     <if test="constructPreson != null" >
       and construct_preson = #{constructPreson,jdbcType=VARCHAR}
     </if>
     <if test="salesCommission != null" >
-      and sales_commission = #{salesCommission,jdbcType=INTEGER}
+      and sales_commission = #{salesCommission}
     </if>
     <if test="salesRate != null" >
-      and sales_rate = #{salesRate,jdbcType=INTEGER}
+      and sales_rate = #{salesRate}
     </if>
     <if test="sales != null" >
       and sales = #{sales,jdbcType=VARCHAR}
@@ -504,37 +504,37 @@
       and belong = #{belong,jdbcType=VARCHAR}
     </if>
     <if test="salePrice != null" >
-      and sale_price = #{salePrice,jdbcType=INTEGER}
+      and sale_price = #{salePrice}
     </if>
     <if test="saleNum != null" >
-      and sale_num = #{saleNum,jdbcType=INTEGER}
+      and sale_num = #{saleNum}
     </if>
     <if test="saleTotalPrice != null" >
-      and sale_total_price = #{saleTotalPrice,jdbcType=INTEGER}
+      and sale_total_price = #{saleTotalPrice}
     </if>
     <if test="rebateNum != null" >
-      and rebate_num = #{rebateNum,jdbcType=INTEGER}
+      and rebate_num = #{rebateNum}
     </if>
     <if test="unRebateNum != null" >
-      and un_rebate_num = #{unRebateNum,jdbcType=INTEGER}
+      and un_rebate_num = #{unRebateNum}
     </if>
     <if test="actualPrice != null" >
-      and actual_price = #{actualPrice,jdbcType=INTEGER}
+      and actual_price = #{actualPrice}
     </if>
     <if test="price != null" >
-      and price = #{price,jdbcType=INTEGER}
+      and price = #{price}
     </if>
     <if test="constructPrice != null" >
-      and construct_price = #{constructPrice,jdbcType=INTEGER}
+      and construct_price = #{constructPrice}
     </if>
     <if test="constructPreson != null" >
       and construct_preson = #{constructPreson,jdbcType=VARCHAR}
     </if>
     <if test="salesCommission != null" >
-      and sales_commission = #{salesCommission,jdbcType=INTEGER}
+      and sales_commission = #{salesCommission}
     </if>
     <if test="salesRate != null" >
-      and sales_rate = #{salesRate,jdbcType=INTEGER}
+      and sales_rate = #{salesRate}
     </if>
     <if test="sales != null" >
       and sales = #{sales,jdbcType=VARCHAR}

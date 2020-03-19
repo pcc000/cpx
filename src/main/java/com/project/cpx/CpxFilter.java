@@ -68,7 +68,7 @@ public class CpxFilter  implements Filter {
             if(CollectionUtils.isEmpty(loginList)){
                 throw new CpxException(ErrorEnum.NOT_LOGIN.getCode(),ErrorEnum.NOT_LOGIN.getMsg());
             }
-            if(System.currentTimeMillis() - loginList.get(0).getGmtModify().getTime()>=2*24*60*1000){
+            if(System.currentTimeMillis() - loginList.get(0).getGmtModify().getTime()>=2*24*60*60*1000){
                 throw new CpxException(ErrorEnum.LONG_TIME_NOT_LOGIN.getCode(),ErrorEnum.LONG_TIME_NOT_LOGIN.getMsg());
             }
             filterChain.doFilter(servletRequest,servletResponse);
@@ -97,18 +97,19 @@ public class CpxFilter  implements Filter {
     }
 
     private boolean isWhiteURI(String uri) {
-        if (whiteURL.isEmpty()) {
-            return Boolean.FALSE;
-        } else {
-            Iterator var2 = whiteURL.iterator();
-            String whiteURI;
-            do {
-                if (!var2.hasNext()) {
-                    return Boolean.FALSE;
-                }
-                whiteURI = (String)var2.next();
-            } while(!uri.matches(whiteURI));
-            return Boolean.TRUE;
-        }
+        return true;
+//        if (whiteURL.isEmpty()) {
+//            return Boolean.FALSE;
+//        } else {
+//            Iterator var2 = whiteURL.iterator();
+//            String whiteURI;
+//            do {
+//                if (!var2.hasNext()) {
+//                    return Boolean.FALSE;
+//                }
+//                whiteURI = (String)var2.next();
+//            } while(!uri.matches(whiteURI));
+//            return Boolean.TRUE;
+//        }
     }
 }

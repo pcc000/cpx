@@ -1,5 +1,6 @@
 package com.project.cpx.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class OperationEntity {
@@ -13,21 +14,21 @@ public class OperationEntity {
 
     private String belong;
 
-    private Integer salePrice;
+    private BigDecimal salePrice;
 
     private Integer saleNum;
 
-    private Integer saleTotalPrice;
+    private BigDecimal saleTotalPrice;
 
     private Integer rebateNum;
 
     private Integer unRebateNum;
 
-    private Integer actualPrice;
+    private BigDecimal actualPrice;
 
-    private Integer price;
+    private BigDecimal price;
 
-    private Integer constructPrice;
+    private BigDecimal constructPrice;
 
     private String constructPreson;
 
@@ -76,7 +77,7 @@ public class OperationEntity {
     }
 
     public void setOperateDate(String operateDate) {
-        this.operateDate = operateDate == null ? null : operateDate.trim();
+        this.operateDate = operateDate;
     }
 
     public String getProductCategory() {
@@ -84,7 +85,7 @@ public class OperationEntity {
     }
 
     public void setProductCategory(String productCategory) {
-        this.productCategory = productCategory == null ? null : productCategory.trim();
+        this.productCategory = productCategory;
     }
 
     public String getProductName() {
@@ -92,7 +93,7 @@ public class OperationEntity {
     }
 
     public void setProductName(String productName) {
-        this.productName = productName == null ? null : productName.trim();
+        this.productName = productName;
     }
 
     public String getBelong() {
@@ -100,14 +101,14 @@ public class OperationEntity {
     }
 
     public void setBelong(String belong) {
-        this.belong = belong == null ? null : belong.trim();
+        this.belong = belong;
     }
 
-    public Integer getSalePrice() {
+    public BigDecimal getSalePrice() {
         return salePrice;
     }
 
-    public void setSalePrice(Integer salePrice) {
+    public void setSalePrice(BigDecimal salePrice) {
         this.salePrice = salePrice;
     }
 
@@ -119,11 +120,11 @@ public class OperationEntity {
         this.saleNum = saleNum;
     }
 
-    public Integer getSaleTotalPrice() {
+    public BigDecimal getSaleTotalPrice() {
         return saleTotalPrice;
     }
 
-    public void setSaleTotalPrice(Integer saleTotalPrice) {
+    public void setSaleTotalPrice(BigDecimal saleTotalPrice) {
         this.saleTotalPrice = saleTotalPrice;
     }
 
@@ -143,27 +144,27 @@ public class OperationEntity {
         this.unRebateNum = unRebateNum;
     }
 
-    public Integer getActualPrice() {
+    public BigDecimal getActualPrice() {
         return actualPrice;
     }
 
-    public void setActualPrice(Integer actualPrice) {
+    public void setActualPrice(BigDecimal actualPrice) {
         this.actualPrice = actualPrice;
     }
 
-    public Integer getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public Integer getConstructPrice() {
+    public BigDecimal getConstructPrice() {
         return constructPrice;
     }
 
-    public void setConstructPrice(Integer constructPrice) {
+    public void setConstructPrice(BigDecimal constructPrice) {
         this.constructPrice = constructPrice;
     }
 
@@ -172,7 +173,7 @@ public class OperationEntity {
     }
 
     public void setConstructPreson(String constructPreson) {
-        this.constructPreson = constructPreson == null ? null : constructPreson.trim();
+        this.constructPreson = constructPreson;
     }
 
     public Integer getSalesCommission() {
@@ -196,7 +197,7 @@ public class OperationEntity {
     }
 
     public void setSales(String sales) {
-        this.sales = sales == null ? null : sales.trim();
+        this.sales = sales;
     }
 
     public String getCollectionType() {
@@ -204,7 +205,7 @@ public class OperationEntity {
     }
 
     public void setCollectionType(String collectionType) {
-        this.collectionType = collectionType == null ? null : collectionType.trim();
+        this.collectionType = collectionType;
     }
 
     public String getPartnerCompanyName() {
@@ -212,7 +213,7 @@ public class OperationEntity {
     }
 
     public void setPartnerCompanyName(String partnerCompanyName) {
-        this.partnerCompanyName = partnerCompanyName == null ? null : partnerCompanyName.trim();
+        this.partnerCompanyName = partnerCompanyName;
     }
 
     public String getPartnerSales() {
@@ -220,7 +221,7 @@ public class OperationEntity {
     }
 
     public void setPartnerSales(String partnerSales) {
-        this.partnerSales = partnerSales == null ? null : partnerSales.trim();
+        this.partnerSales = partnerSales;
     }
 
     public String getCarType() {
@@ -228,7 +229,7 @@ public class OperationEntity {
     }
 
     public void setCarType(String carType) {
-        this.carType = carType == null ? null : carType.trim();
+        this.carType = carType;
     }
 
     public String getCarFrame() {
@@ -236,7 +237,7 @@ public class OperationEntity {
     }
 
     public void setCarFrame(String carFrame) {
-        this.carFrame = carFrame == null ? null : carFrame.trim();
+        this.carFrame = carFrame;
     }
 
     public String getCarNo() {
@@ -244,7 +245,7 @@ public class OperationEntity {
     }
 
     public void setCarNo(String carNo) {
-        this.carNo = carNo == null ? null : carNo.trim();
+        this.carNo = carNo;
     }
 
     public String getCarOwner() {
@@ -252,7 +253,7 @@ public class OperationEntity {
     }
 
     public void setCarOwner(String carOwner) {
-        this.carOwner = carOwner == null ? null : carOwner.trim();
+        this.carOwner = carOwner;
     }
 
     public String getCarOwnerPhone() {
@@ -260,7 +261,7 @@ public class OperationEntity {
     }
 
     public void setCarOwnerPhone(String carOwnerPhone) {
-        this.carOwnerPhone = carOwnerPhone == null ? null : carOwnerPhone.trim();
+        this.carOwnerPhone = carOwnerPhone;
     }
 
     public String getRemark() {
@@ -268,7 +269,7 @@ public class OperationEntity {
     }
 
     public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
+        this.remark = remark;
     }
 
     public Date getGmtCreate() {

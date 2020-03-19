@@ -12,9 +12,9 @@ import java.util.List;
  */
 public interface MemberService {
 
-    int add(MemberEntity feeEntity);
+    int add(MemberEntity entity);
 
-    int update(MemberEntity feeEntity);
+    int update(MemberEntity entity);
 
     int deleteById(Integer id);
 

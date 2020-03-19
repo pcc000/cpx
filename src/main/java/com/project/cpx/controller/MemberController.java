@@ -4,9 +4,10 @@ import com.project.cpx.common.util.CheckCondition;
 import com.project.cpx.common.util.ErrorEnum;
 import com.project.cpx.common.util.Response;
 import com.project.cpx.entity.MemberEntity;
-import com.project.cpx.entity.query.InventoryQuery;
+import com.project.cpx.entity.MemberRightEntity;
 import com.project.cpx.entity.query.MemberQuery;
-import com.project.cpx.service.InventoryService;
+import com.project.cpx.entity.query.MemberRightQuery;
+import com.project.cpx.service.MemberRightService;
 import com.project.cpx.service.MemberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -16,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,6 +30,9 @@ public class MemberController {
 
     @Resource
     private MemberService memberService;
+
+    @Resource
+    private MemberRightService memberRightService;
 
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody
@@ -57,5 +59,32 @@ public class MemberController {
     @ResponseBody
     public Response<List<MemberEntity>> query(MemberQuery query){
         return Response.ok(memberService.query(query),query);
+    }
+
+    @RequestMapping(value = "/addMemberRight",method = RequestMethod.POST)
+    @ResponseBody
+    public Response<Integer> addMemberRight(@RequestBody MemberRightEntity entity){
+        return Response.ok(memberRightService.add(entity));
+    }
+
+    @RequestMapping(value = "/updateMemberRight",method = RequestMethod.POST)
+    @ResponseBody
+    public Response<Integer> update(@RequestBody MemberRightEntity entity){
+        CheckCondition.checkArgument(!StringUtils.isEmpty(entity.getId()), ErrorEnum.PARAM.getCode(),"id");
+        return Response.ok(memberRightService.update(entity));
+    }
+
+
+    @RequestMapping(value = "/deleteMemberRight",method = RequestMethod.POST)
+    @ResponseBody
+    public Response<Integer> deleteMemberRight(@RequestBody MemberRightEntity entity){
+        CheckCondition.checkArgument(!StringUtils.isEmpty(entity.getId()), ErrorEnum.PARAM.getCode(),"id");
+        return Response.ok(memberRightService.deleteById(entity.getId()));
+    }
+
+    @RequestMapping(value = "/queryMemberRight",method = RequestMethod.GET)
+    @ResponseBody
+    public Response<List<MemberRightEntity>> queryMemberRight(MemberRightQuery query){
+        return Response.ok(memberRightService.query(query),query);
     }
 }
