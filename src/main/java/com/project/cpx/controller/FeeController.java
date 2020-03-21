@@ -1,27 +1,24 @@
 package com.project.cpx.controller;
 
-import com.project.cpx.common.util.CheckCondition;
-import com.project.cpx.common.util.ErrorEnum;
-import com.project.cpx.common.util.Response;
-import com.project.cpx.entity.CommonBuilder;
-import com.project.cpx.entity.ConfigEntity;
-import com.project.cpx.entity.FeeEntity;
-import com.project.cpx.entity.PurchaseEntity;
+import com.project.cpx.common.util.*;
+import com.project.cpx.entity.*;
 import com.project.cpx.entity.dto.FeeDTO;
 import com.project.cpx.entity.query.FeeQuery;
+import com.project.cpx.entity.query.OperationQuery;
 import com.project.cpx.service.FeeService;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Auther: shuyiwei
@@ -81,5 +78,18 @@ public class FeeController {
     @ResponseBody
     public Response<List<String>> queryByPayer(FeeQuery entity){
         return Response.ok(feeService.queryByPayer(entity));
+    }
+
+    @GetMapping("/export")
+    public HttpEntity<byte[]> export(FeeQuery query, HttpServletResponse response) throws Exception{
+        List<FeeEntity> querReulstList  = feeService.query(query);
+        List<List<FeeEntity>> resultList = new ArrayList<>();
+        resultList.add(querReulstList);
+        Map<String, String> headMap = Constant.EXPORT_FEE_MAP;
+        ExcelUtil export = new ExcelUtil();
+        byte[] bytes = export.export(resultList, FeeEntity.class, headMap);
+        response.setContentType(ExcelUtil.RESPONSE_CONTENT_TYPE);
+        response.addHeader("Content-Disposition", ExcelUtil.getResponseHeadValue(Constant.EXPORT_FEE_NAME));
+        return new HttpEntity<>(bytes);
     }
 }

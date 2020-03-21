@@ -5,6 +5,8 @@ import java.util.Date;
 public class MemberEntity {
     private Integer id;
 
+    private String carBrand;
+
     private String carType;
 
     private String carFrame;
@@ -13,7 +15,11 @@ public class MemberEntity {
 
     private String carOwner;
 
+    private String carBornDate;
+
     private String carOwnerPhone;
+
+    private String memberType;
 
     private String remark;
 
@@ -111,5 +117,29 @@ public class MemberEntity {
 
     public void setRowVersion(Integer rowVersion) {
         this.rowVersion = rowVersion;
+    }
+
+    public String getCarBrand() {
+        return carBrand;
+    }
+
+    public void setCarBrand(String carBrand) {
+        this.carBrand = carBrand;
+    }
+
+    public String getCarBornDate() {
+        return carBornDate;
+    }
+
+    public void setCarBornDate(String carBornDate) {
+        this.carBornDate = carBornDate;
+    }
+
+    public String getMemberType() {
+        return memberType;
+    }
+
+    public void setMemberType(String memberType) {
+        this.memberType = memberType;
     }
 }

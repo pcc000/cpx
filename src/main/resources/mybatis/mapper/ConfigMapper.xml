@@ -153,7 +153,7 @@
       and key = #{key,jdbcType=VARCHAR}
     </if>
     <if test="value != null" >
-      and value = CONCAT('%',#{value},'%')
+      and value like CONCAT('%',#{value},'%')
     </if>
     <if test="parentKey != null" >
       and parent_key = #{parentKey,jdbcType=VARCHAR}

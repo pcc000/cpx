@@ -1,23 +1,20 @@
 package com.project.cpx.controller;
 
-import com.project.cpx.common.util.CheckCondition;
-import com.project.cpx.common.util.ErrorEnum;
-import com.project.cpx.common.util.Response;
+import com.project.cpx.common.util.*;
 import com.project.cpx.entity.OperationEntity;
 import com.project.cpx.entity.query.InventoryQuery;
 import com.project.cpx.entity.query.OperationQuery;
 import com.project.cpx.service.OperationService;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Auther: shuyiwei
@@ -58,6 +55,19 @@ public class OperationController {
     @ResponseBody
     public Response<List<OperationEntity>> query(OperationQuery query){
         return Response.ok(operationService.query(query),query);
+    }
+
+    @GetMapping("/export")
+    public HttpEntity<byte[]> export(OperationQuery query, HttpServletResponse response) throws Exception{
+        List<OperationEntity> querReulstList  = operationService.query(query);
+        List<List<OperationEntity>> resultList = new ArrayList<>();
+        resultList.add(querReulstList);
+        Map<String, String> headMap = Constant.EXPORT_OPERATION_MAP;
+        ExcelUtil export = new ExcelUtil();
+        byte[] bytes = export.export(resultList, OperationEntity.class, headMap);
+        response.setContentType(ExcelUtil.RESPONSE_CONTENT_TYPE);
+        response.addHeader("Content-Disposition", ExcelUtil.getResponseHeadValue(Constant.EXPORT_OPERATION_NAME));
+        return new HttpEntity<>(bytes);
     }
 
 }

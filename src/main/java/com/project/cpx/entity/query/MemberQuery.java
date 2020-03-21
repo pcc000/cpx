@@ -17,6 +17,12 @@ public class MemberQuery extends BaseQuery {
 
     private String carOwnerPhone;
 
+    private String carBrand;
+
+    private String carBornDate;
+
+    private String memberType;
+
     public String getCarType() {
         return carType;
     }
@@ -55,5 +61,29 @@ public class MemberQuery extends BaseQuery {
 
     public void setCarOwnerPhone(String carOwnerPhone) {
         this.carOwnerPhone = carOwnerPhone;
+    }
+
+    public String getCarBrand() {
+        return carBrand;
+    }
+
+    public void setCarBrand(String carBrand) {
+        this.carBrand = carBrand;
+    }
+
+    public String getCarBornDate() {
+        return carBornDate;
+    }
+
+    public void setCarBornDate(String carBornDate) {
+        this.carBornDate = carBornDate;
+    }
+
+    public String getMemberType() {
+        return memberType;
+    }
+
+    public void setMemberType(String memberType) {
+        this.memberType = memberType;
     }
 }

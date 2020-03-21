@@ -1,23 +1,24 @@
 package com.project.cpx.controller;
 
-import com.project.cpx.common.util.CheckCondition;
-import com.project.cpx.common.util.ErrorEnum;
-import com.project.cpx.common.util.Response;
+import com.project.cpx.common.util.*;
+import com.project.cpx.entity.InventoryEntity;
 import com.project.cpx.entity.MemberEntity;
 import com.project.cpx.entity.MemberRightEntity;
+import com.project.cpx.entity.query.InventoryQuery;
 import com.project.cpx.entity.query.MemberQuery;
 import com.project.cpx.entity.query.MemberRightQuery;
 import com.project.cpx.service.MemberRightService;
 import com.project.cpx.service.MemberService;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Auther: shuyiwei
@@ -86,5 +87,18 @@ public class MemberController {
     @ResponseBody
     public Response<List<MemberRightEntity>> queryMemberRight(MemberRightQuery query){
         return Response.ok(memberRightService.query(query),query);
+    }
+
+    @GetMapping("/export")
+    public HttpEntity<byte[]> export(MemberQuery query, HttpServletResponse response) throws Exception{
+        List<MemberEntity> querReulstList  = memberService.query(query);
+        List<List<MemberEntity>> resultList = new ArrayList<>();
+        resultList.add(querReulstList);
+        Map<String, String> headMap = Constant.EXPORT_MEMBER_MAP;
+        ExcelUtil export = new ExcelUtil();
+        byte[] bytes = export.export(resultList, MemberEntity.class, headMap);
+        response.setContentType(ExcelUtil.RESPONSE_CONTENT_TYPE);
+        response.addHeader("Content-Disposition", ExcelUtil.getResponseHeadValue(Constant.EXPORT_MEMBER_NAME));
+        return new HttpEntity<>(bytes);
     }
 }

@@ -1,8 +1,6 @@
 package com.project.cpx.controller;
 
-import com.project.cpx.common.util.CheckCondition;
-import com.project.cpx.common.util.ErrorEnum;
-import com.project.cpx.common.util.Response;
+import com.project.cpx.common.util.*;
 import com.project.cpx.entity.ConfigEntity;
 import com.project.cpx.entity.FeeEntity;
 import com.project.cpx.entity.PurchaseEntity;
@@ -10,17 +8,18 @@ import com.project.cpx.entity.query.FeeQuery;
 import com.project.cpx.entity.query.PurchaseQuery;
 import com.project.cpx.service.FeeService;
 import com.project.cpx.service.PurchaseService;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Auther: shuyiwei
@@ -84,5 +83,18 @@ public class PurchaseController {
     @ResponseBody
     public Response<List<PurchaseEntity>> queryBySupplierCompanyName(PurchaseQuery entity){
         return Response.ok(purchaseService.queryBySupplierCompanyName(entity));
+    }
+
+    @GetMapping("/export")
+    public HttpEntity<byte[]> export(PurchaseQuery query, HttpServletResponse response) throws Exception{
+        List<PurchaseEntity> querReulstList  = purchaseService.query(query);
+        List<List<PurchaseEntity>> resultList = new ArrayList<>();
+        resultList.add(querReulstList);
+        Map<String, String> headMap = Constant.EXPORT_PURCHASE_MAP;
+        ExcelUtil export = new ExcelUtil();
+        byte[] bytes = export.export(resultList, PurchaseEntity.class, headMap);
+        response.setContentType(ExcelUtil.RESPONSE_CONTENT_TYPE);
+        response.addHeader("Content-Disposition", ExcelUtil.getResponseHeadValue(Constant.EXPORT_PURCHASE_NAME));
+        return new HttpEntity<>(bytes);
     }
 }

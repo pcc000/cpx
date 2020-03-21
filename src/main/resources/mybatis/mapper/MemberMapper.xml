@@ -8,6 +8,9 @@
     <result column="car_no" property="carNo" jdbcType="VARCHAR" />
     <result column="car_owner" property="carOwner" jdbcType="VARCHAR" />
     <result column="car_owner_phone" property="carOwnerPhone" jdbcType="VARCHAR" />
+    <result column="car_brand" property="carBrand" jdbcType="VARCHAR" />
+    <result column="car_born_date" property="carBornDate" jdbcType="VARCHAR" />
+    <result column="member_type" property="memberType" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
@@ -16,7 +19,7 @@
   </resultMap>
   <sql id="Base_Column_List" >
     id, car_type, car_frame, car_no, car_owner, car_owner_phone, remark, gmt_create, 
-    gmt_modify, row_status, row_version
+    gmt_modify, row_status, row_version,car_brand,car_born_date,member_type
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -32,11 +35,12 @@
     insert into member (id, car_type, car_frame, 
       car_no, car_owner, car_owner_phone, 
       remark, gmt_create, gmt_modify, 
-      row_status, row_version)
+      row_status, row_version,car_brand,car_born_date,member_type)
     values (#{id,jdbcType=INTEGER}, #{carType,jdbcType=VARCHAR}, #{carFrame,jdbcType=VARCHAR}, 
       #{carNo,jdbcType=VARCHAR}, #{carOwner,jdbcType=VARCHAR}, #{carOwnerPhone,jdbcType=VARCHAR}, 
       #{remark,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, 
-      #{rowStatus,jdbcType=TINYINT}, #{rowVersion,jdbcType=INTEGER})
+      #{rowStatus,jdbcType=TINYINT}, #{rowVersion,jdbcType=INTEGER}
+      , #{carBrand,jdbcType=VARCHAR}, #{carBornDate,jdbcType=VARCHAR}, #{memberType,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.project.cpx.entity.MemberEntity" >
     insert into member
@@ -74,6 +78,15 @@
       <if test="rowVersion != null" >
         row_version,
       </if>
+      <if test="carBrand != null" >
+        car_brand,
+      </if>
+      <if test="carBornDate != null" >
+        car_born_date,
+      </if>
+      <if test="memberType != null" >
+        member_type,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -109,6 +122,15 @@
       <if test="rowVersion != null" >
         #{rowVersion,jdbcType=INTEGER},
       </if>
+      <if test="carBrand != null" >
+        #{carBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="carBornDate != null" >
+        #{carBornDate,jdbcType=VARCHAR},
+      </if>
+      <if test="memberType != null" >
+        #{memberType,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.project.cpx.entity.MemberEntity" >
@@ -138,6 +160,15 @@
       <if test="rowVersion != null" >
         row_version = #{rowVersion,jdbcType=INTEGER},
       </if>
+      <if test="carBrand != null" >
+        car_brand = #{carBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="carBornDate != null" >
+        car_born_date = #{carBornDate,jdbcType=VARCHAR},
+      </if>
+      <if test="memberType != null" >
+        member_type = #{memberType,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -150,6 +181,9 @@
       car_owner_phone = #{carOwnerPhone,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       row_status = #{rowStatus,jdbcType=TINYINT},
+      car_brand = #{carBrand,jdbcType=VARCHAR},
+      car_born_date = #{carBornDate,jdbcType=VARCHAR},
+      member_type = #{memberType,jdbcType=VARCHAR},
       row_version = #{rowVersion,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -172,6 +206,15 @@
     </if>
     <if test="carOwnerPhone != null" >
       and car_owner_phone like CONCAT(#{carOwnerPhone},'%')
+    </if>
+    <if test="carBrand != null" >
+      and car_brand = #{carBrand,jdbcType=VARCHAR}
+    </if>
+    <if test="carBornDate != null" >
+      and car_born_date = #{carBornDate,jdbcType=VARCHAR}
+    </if>
+    <if test="memberType != null" >
+      and member_type = #{memberType,jdbcType=VARCHAR}
     </if>
     <if test="column == null and (sort == null)">
       order by id DESC
@@ -202,6 +245,15 @@
     </if>
     <if test="carOwnerPhone != null" >
       and car_owner_phone like CONCAT(#{carOwnerPhone},'%')
+    </if>
+    <if test="carBrand != null" >
+      and car_brand = #{carBrand,jdbcType=VARCHAR}
+    </if>
+    <if test="carBornDate != null" >
+      and car_born_date = #{carBornDate,jdbcType=VARCHAR}
+    </if>
+    <if test="memberType != null" >
+      and member_type = #{memberType,jdbcType=VARCHAR}
     </if>
   </select>
 </mapper>
