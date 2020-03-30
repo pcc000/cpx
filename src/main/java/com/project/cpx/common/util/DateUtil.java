@@ -406,6 +406,24 @@ public final class DateUtil {
         return cal.getTime();
     }
 
+    public static String getMonthFirstDay(){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cale = null;
+        cale = Calendar.getInstance();
+        cale.add(Calendar.MONTH, 0);
+        cale.set(Calendar.DAY_OF_MONTH, 1);
+        return format.format(cale.getTime());
+    }
+
+    public static String getMonthLastDay(){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cale = null;
+        cale = Calendar.getInstance();
+        cale.add(Calendar.MONTH, 1);
+        cale.set(Calendar.DAY_OF_MONTH, 0);
+        return format.format(cale.getTime());
+    }
+
     public interface DATE_PATTERN {
         String HHMMSS = "HHmmss";
         String HH_MM_SS = "HH:mm:ss";

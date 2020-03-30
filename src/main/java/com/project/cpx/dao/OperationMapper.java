@@ -1,6 +1,7 @@
 package com.project.cpx.dao;
 
 import com.project.cpx.entity.OperationEntity;
+import com.project.cpx.entity.dto.ProfitDTO;
 import com.project.cpx.entity.query.OperationQuery;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface OperationMapper {
     List<OperationEntity> query(OperationQuery query);
 
     Integer queryCount(OperationQuery query);
+
+    List<ProfitDTO> queryByDate(OperationQuery query);
 }

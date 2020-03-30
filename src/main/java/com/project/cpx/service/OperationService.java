@@ -2,6 +2,7 @@ package com.project.cpx.service;
 
 import com.project.cpx.entity.InventoryEntity;
 import com.project.cpx.entity.OperationEntity;
+import com.project.cpx.entity.dto.ProfitDTO;
 import com.project.cpx.entity.query.OperationQuery;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface OperationService {
     int deleteById(Integer id);
 
     List<OperationEntity> query(OperationQuery query);
+
+    List<ProfitDTO> queryByDate(OperationQuery query);
 }

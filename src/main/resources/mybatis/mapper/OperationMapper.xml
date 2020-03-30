@@ -33,6 +33,13 @@
     <result column="row_status" property="rowStatus" jdbcType="TINYINT" />
     <result column="row_version" property="rowVersion" jdbcType="INTEGER" />
   </resultMap>
+
+  <resultMap id="ProfitResultMap" type="com.project.cpx.entity.dto.ProfitDTO" >
+    <result column="operate_date" property="operateDate" jdbcType="VARCHAR" />
+    <result column="income" property="income" />
+    <result column="grossProfit" property="grossProfit" />
+    <result column="incomePerOrder" property="incomePerOrder" />
+  </resultMap>
   <sql id="Base_Column_List" >
     id, operate_date, product_category, product_name, belong, sale_price, sale_num, sale_total_price, 
     rebate_num, un_rebate_num, actual_price, price, construct_price, construct_preson, 
@@ -555,6 +562,91 @@
     <if test="carOwnerPhone != null" >
       and car_owner_phone = #{carOwnerPhone,jdbcType=VARCHAR}
     </if>
+  </select>
+
+  <select id="queryByDate" resultMap="ProfitResultMap" parameterType="com.project.cpx.entity.query.OperationQuery">
+    select operate_date,sum(actual_price) as income,sum(actual_price)-sum(price) as grossProfit,sum(actual_price)/sum(sale_num) as incomePerOrder
+    from operation
+    where row_status =0
+    <if test="start != null" >
+      and operate_date &gt;= #{start}
+    </if>
+    <if test="end != null" >
+      and operate_date &lt;= #{end}
+    </if>
+    <if test="operateDate != null" >
+      and operate_date = #{operateDate,jdbcType=VARCHAR}
+    </if>
+    <if test="productCategory != null" >
+      and product_category = #{productCategory,jdbcType=VARCHAR}
+    </if>
+    <if test="productName != null" >
+      and product_name = #{productName,jdbcType=VARCHAR}
+    </if>
+    <if test="belong != null" >
+      and belong = #{belong,jdbcType=VARCHAR}
+    </if>
+    <if test="salePrice != null" >
+      and sale_price = #{salePrice}
+    </if>
+    <if test="saleNum != null" >
+      and sale_num = #{saleNum}
+    </if>
+    <if test="saleTotalPrice != null" >
+      and sale_total_price = #{saleTotalPrice}
+    </if>
+    <if test="rebateNum != null" >
+      and rebate_num = #{rebateNum}
+    </if>
+    <if test="unRebateNum != null" >
+      and un_rebate_num = #{unRebateNum}
+    </if>
+    <if test="actualPrice != null" >
+      and actual_price = #{actualPrice}
+    </if>
+    <if test="price != null" >
+      and price = #{price}
+    </if>
+    <if test="constructPrice != null" >
+      and construct_price = #{constructPrice}
+    </if>
+    <if test="constructPreson != null" >
+      and construct_preson = #{constructPreson,jdbcType=VARCHAR}
+    </if>
+    <if test="salesCommission != null" >
+      and sales_commission = #{salesCommission}
+    </if>
+    <if test="salesRate != null" >
+      and sales_rate = #{salesRate}
+    </if>
+    <if test="sales != null" >
+      and sales = #{sales,jdbcType=VARCHAR}
+    </if>
+    <if test="collectionType != null" >
+      and collection_type = #{collectionType,jdbcType=VARCHAR}
+    </if>
+    <if test="partnerCompanyName != null" >
+      and partner_company_name = #{partnerCompanyName,jdbcType=VARCHAR}
+    </if>
+    <if test="partnerSales != null" >
+      and partner_sales = #{partnerSales,jdbcType=VARCHAR}
+    </if>
+    <if test="carType != null" >
+      and car_type = #{carType,jdbcType=VARCHAR}
+    </if>
+    <if test="carFrame != null" >
+      and car_frame = #{carFrame,jdbcType=VARCHAR}
+    </if>
+    <if test="carNo != null" >
+      and car_no = #{carNo,jdbcType=VARCHAR}
+    </if>
+    <if test="carOwner != null" >
+      and car_owner = #{carOwner,jdbcType=VARCHAR}
+    </if>
+    <if test="carOwnerPhone != null" >
+      and car_owner_phone = #{carOwnerPhone,jdbcType=VARCHAR}
+    </if>
+    group by operate_date
   </select>
 
 </mapper>

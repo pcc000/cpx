@@ -1,6 +1,7 @@
 package com.project.cpx;
 
 
+import com.project.cpx.common.util.CookieUtil;
 import com.project.cpx.common.util.CpxException;
 import com.project.cpx.common.util.ErrorEnum;
 import com.project.cpx.entity.CommonBuilder;
@@ -55,7 +56,8 @@ public class CpxFilter  implements Filter {
             filterChain.doFilter(servletRequest,servletResponse);
             return;
         }
-        String sessionId = httpServletRequest.getHeader("sessionId");
+        String sessionId = this.getSessionid(httpServletRequest);
+//        String sessionId = httpServletRequest.getHeader("sessionId");
         if(StringUtils.isEmpty(sessionId)){
             throw new CpxException(ErrorEnum.NOT_LOGIN.getCode(),ErrorEnum.NOT_LOGIN.getMsg());
         }
@@ -111,5 +113,9 @@ public class CpxFilter  implements Filter {
 //            } while(!uri.matches(whiteURI));
 //            return Boolean.TRUE;
 //        }
+    }
+
+    private String getSessionid(HttpServletRequest request) {
+        return CookieUtil.getCookieValue(request, "sid");
     }
 }

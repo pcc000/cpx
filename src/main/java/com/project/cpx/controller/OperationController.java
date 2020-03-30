@@ -2,6 +2,7 @@ package com.project.cpx.controller;
 
 import com.project.cpx.common.util.*;
 import com.project.cpx.entity.OperationEntity;
+import com.project.cpx.entity.dto.ProfitDTO;
 import com.project.cpx.entity.query.InventoryQuery;
 import com.project.cpx.entity.query.OperationQuery;
 import com.project.cpx.service.OperationService;
@@ -55,6 +56,12 @@ public class OperationController {
     @ResponseBody
     public Response<List<OperationEntity>> query(OperationQuery query){
         return Response.ok(operationService.query(query),query);
+    }
+
+    @RequestMapping(value = "/queryByDate",method = RequestMethod.GET)
+    @ResponseBody
+    public Response<List<ProfitDTO>> queryByDate(OperationQuery query){
+        return Response.ok(operationService.queryByDate(query),query);
     }
 
     @GetMapping("/export")

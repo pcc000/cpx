@@ -58,4 +58,6 @@ public class BaseQuery extends Page{
     public void setSort(String sort) {
         this.sort = sort;
     }
+
+
 }
