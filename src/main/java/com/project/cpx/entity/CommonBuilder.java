@@ -88,4 +88,17 @@ public class CommonBuilder {
         inventoryEntity.setCarType(entity.getCarType());
         return inventoryEntity;
     }
+
+    public static InventoryEntity buildInventoyByOperation(OperationEntity entity) {
+        InventoryEntity inventoryEntity = new InventoryEntity();
+        inventoryEntity.setOperateDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        inventoryEntity.setStockNum(entity.getSaleNum());
+        inventoryEntity.setBelong(entity.getBelong());
+        inventoryEntity.setProductName(entity.getProductName());
+        inventoryEntity.setProductCategory(entity.getProductCategory());
+        inventoryEntity.setPrice(entity.getPrice());
+        inventoryEntity.setBillNo("O"+entity.getId());
+        inventoryEntity.setCarType(entity.getCarType());
+        return inventoryEntity;
+    }
 }

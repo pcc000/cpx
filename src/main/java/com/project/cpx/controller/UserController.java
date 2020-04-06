@@ -39,7 +39,7 @@ public class UserController {
     public Response<Integer> add(@RequestBody UserEntity userEntity){
         CheckCondition.checkArgument(!StringUtils.isEmpty(userEntity.getUserName()), ErrorEnum.PARAM.getCode(),"用户姓名");
         CheckCondition.checkArgument(!StringUtils.isEmpty(userEntity.getPassword()), ErrorEnum.PARAM.getCode(),"密码");
-        CheckCondition.checkArgument(!StringUtils.isEmpty(userEntity.getShopNo()), ErrorEnum.PARAM.getCode(),"店铺");
+//        CheckCondition.checkArgument(!StringUtils.isEmpty(userEntity.getShopNo()), ErrorEnum.PARAM.getCode(),"店铺");
         UserEntity userQuery = CommonBuilder.buildUserQuery(userEntity);
         List<UserEntity> resultQueryList = userService.query(userQuery);
         if(!CollectionUtils.isEmpty(resultQueryList)){

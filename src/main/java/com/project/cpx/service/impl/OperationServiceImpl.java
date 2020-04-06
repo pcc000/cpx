@@ -2,10 +2,13 @@ package com.project.cpx.service.impl;
 
 import com.project.cpx.common.util.DateUtil;
 import com.project.cpx.dao.OperationMapper;
+import com.project.cpx.entity.CommonBuilder;
+import com.project.cpx.entity.InventoryEntity;
 import com.project.cpx.entity.InventoryLogEntity;
 import com.project.cpx.entity.OperationEntity;
 import com.project.cpx.entity.dto.ProfitDTO;
 import com.project.cpx.entity.query.OperationQuery;
+import com.project.cpx.service.InventoryService;
 import com.project.cpx.service.OperationService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -26,9 +29,17 @@ public class OperationServiceImpl implements OperationService {
     @Resource
     private OperationMapper operationMapper;
 
+    @Resource
+    private InventoryService inventoryService;
+
     @Override
     public int add(OperationEntity entity) {
-        return operationMapper.insertSelective(entity);
+        Integer result = operationMapper.insertSelective(entity);
+        if(result > 0){
+            InventoryEntity inventoryEntity = CommonBuilder.buildInventoyByOperation(entity);
+            inventoryService.reduceInventory(inventoryEntity);
+        }
+        return result;
     }
 
     @Override

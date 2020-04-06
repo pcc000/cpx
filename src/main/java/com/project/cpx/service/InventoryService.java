@@ -32,4 +32,6 @@ public interface InventoryService {
     List<InventoryLogEntity> query(InventoryLogQuery query);
 
     int addInventory(InventoryEntity entity);
+
+    int reduceInventory(InventoryEntity entity);
 }

@@ -102,4 +102,20 @@ public class InventoryServiceImpl implements InventoryService {
         }
         return 1;
     }
+
+    @Override
+    public synchronized int reduceInventory(InventoryEntity entity) {
+        InventoryQuery query = CommonBuilder.buildAddQuery(entity);
+        List<InventoryEntity> inventoryList = inventoryMapper.query(query);
+        InventoryLogEntity log = CommonBuilder.addLog(entity);
+        inventoryLogMapper.insertSelective(log);
+        if(CollectionUtils.isEmpty(inventoryList)){
+            inventoryMapper.insertSelective(entity);
+        }else{
+            InventoryEntity inventoryEntity = inventoryList.get(0);
+            inventoryEntity.setStockNum(inventoryEntity.getStockNum() - entity.getStockNum());
+            inventoryMapper.updateByPrimaryKeySelective(inventoryEntity);
+        }
+        return 1;
+    }
 }
