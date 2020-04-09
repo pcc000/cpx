@@ -1,6 +1,7 @@
 package com.project.cpx.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class MemberEntity {
     private Integer id;
@@ -23,13 +24,15 @@ public class MemberEntity {
 
     private String remark;
 
-    private Date gmtCreate;
+    private String gmtCreate;
 
     private Date gmtModify;
 
     private Byte rowStatus;
 
     private Integer rowVersion;
+
+    private List<MemberRightEntity> rights;
 
     public Integer getId() {
         return id;
@@ -87,11 +90,11 @@ public class MemberEntity {
         this.remark = remark == null ? null : remark.trim();
     }
 
-    public Date getGmtCreate() {
+    public String getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(String gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
@@ -141,5 +144,13 @@ public class MemberEntity {
 
     public void setMemberType(String memberType) {
         this.memberType = memberType;
+    }
+
+    public List<MemberRightEntity> getRights() {
+        return rights;
+    }
+
+    public void setRights(List<MemberRightEntity> rights) {
+        this.rights = rights;
     }
 }

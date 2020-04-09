@@ -1,5 +1,6 @@
 package com.project.cpx.service;
 
+import com.project.cpx.entity.MemberEntity;
 import com.project.cpx.entity.MemberRightEntity;
 import com.project.cpx.entity.query.MemberQuery;
 import com.project.cpx.entity.query.MemberRightQuery;
@@ -13,9 +14,9 @@ import java.util.List;
  */
 public interface MemberRightService {
 
-    int add(MemberRightEntity entity);
+    int add(MemberEntity entity);
 
-    int update(MemberRightEntity entity);
+    int update(MemberEntity entity);
 
     int deleteById(Integer id);
 

@@ -96,6 +96,7 @@ public class CpxFilter  implements Filter {
 
     private void initWhiteURL(){
         whiteURL.add("/user/login");
+        whiteURL.add("/config/query");
     }
 
     private boolean isWhiteURI(String uri) {
@@ -116,6 +117,6 @@ public class CpxFilter  implements Filter {
     }
 
     private String getSessionid(HttpServletRequest request) {
-        return CookieUtil.getCookieValue(request, "sid");
+        return CookieUtil.getCookieValue(request, "SESSIONID");
     }
 }

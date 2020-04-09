@@ -1,6 +1,10 @@
 package com.project.cpx.service.impl;
 
+import com.project.cpx.common.util.CpxException;
+import com.project.cpx.common.util.ErrorEnum;
+import com.project.cpx.dao.MemberMapper;
 import com.project.cpx.dao.MemberRightMapper;
+import com.project.cpx.entity.CommonBuilder;
 import com.project.cpx.entity.MemberEntity;
 import com.project.cpx.entity.MemberRightEntity;
 import com.project.cpx.entity.query.MemberRightQuery;
@@ -8,6 +12,7 @@ import com.project.cpx.service.MemberRightService;
 import com.project.cpx.service.MemberService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -24,14 +29,42 @@ public class MemberRightServiceImpl implements MemberRightService {
     @Resource
     private MemberRightMapper memberRightMapper;
 
+    @Resource
+    private MemberMapper memberMapper;
+
     @Override
-    public int add(MemberRightEntity entity) {
-        return memberRightMapper.insertSelective(entity);
+    public int add(MemberEntity entity) {
+        MemberEntity result = memberMapper.selectByPrimaryKey(entity.getId());
+        if(null != result ){
+            if(!CollectionUtils.isEmpty(entity.getRights())){
+                entity.getRights().forEach(rightEntity->{
+                    if(null == rightEntity.getNum() || StringUtils.isEmpty(rightEntity.getRightContent())){
+                        throw new CpxException(ErrorEnum.PARAM.getCode(),String.format(ErrorEnum.PARAM.getMsg(),"权益或数量不能为空"));
+                    }
+                    rightEntity.setMemberId(entity.getId());
+                    memberRightMapper.insertSelective(rightEntity);
+                });
+            }
+        }
+        return result.getId();
     }
 
     @Override
-    public int update(MemberRightEntity entity) {
-        return memberRightMapper.updateByPrimaryKeySelective(entity);
+    public int update(MemberEntity entity) {
+        MemberEntity result = memberMapper.selectByPrimaryKey(entity.getId());
+        if(null != result ){
+            int updateResult = memberRightMapper.updateByMemberId(entity.getId());
+            if(updateResult>0 && !CollectionUtils.isEmpty(entity.getRights())){
+                entity.getRights().forEach(rightEntity->{
+                    if(null == rightEntity.getNum() || StringUtils.isEmpty(rightEntity.getRightContent())){
+                        throw new CpxException(ErrorEnum.PARAM.getCode(),String.format(ErrorEnum.PARAM.getMsg(),"权益或数量不能为空"));
+                    }
+                    rightEntity.setMemberId(entity.getId());
+                    memberRightMapper.insertSelective(rightEntity);
+                });
+            }
+        }
+        return result.getId();
     }
 
     @Override

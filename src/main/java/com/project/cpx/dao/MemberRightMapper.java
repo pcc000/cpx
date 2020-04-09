@@ -21,4 +21,8 @@ public interface MemberRightMapper {
     List<MemberRightEntity> query(MemberRightQuery query);
 
     Integer queryCount(MemberRightQuery query);
+
+    Integer updateByMemberId(Integer id);
+
+    List<MemberRightEntity> queryByMemberId(List<Integer> ids);
 }

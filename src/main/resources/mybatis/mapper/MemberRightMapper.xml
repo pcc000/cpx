@@ -27,6 +27,12 @@
     update member_right set row_status=-1
     where id = #{id,jdbcType=INTEGER}
   </delete>
+  
+  <update id="updateByMemberId" parameterType="java.lang.Integer" >
+    update member_right set row_status=-1
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </update>
+
   <insert id="insert" parameterType="com.project.cpx.entity.MemberRightEntity" >
     insert into member_right (id, member_id, car_owner_phone, 
       right_content, num, remark, 
@@ -142,6 +148,16 @@
       row_version = #{rowVersion,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="queryByMemberId" resultMap="BaseResultMap" parameterType="java.util.List">
+    select <include refid="Base_Column_List" />
+    from member_right
+    where row_status =0
+    and member_id in(
+    <foreach collection="list" item="item" index="index" separator=",">
+        #{item}
+    </foreach>)
+  </select>
 
   <select id="query" resultMap="BaseResultMap" parameterType="com.project.cpx.entity.query.MemberRightQuery">
     select <include refid="Base_Column_List" />

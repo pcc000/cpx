@@ -142,5 +142,8 @@
     <if test="shopName != null" >
       and shop_name = #{shopName,jdbcType=VARCHAR}
     </if>
+    <if test="password != null" >
+      and password = #{password,jdbcType=VARCHAR}
+    </if>
   </select>
 </mapper>

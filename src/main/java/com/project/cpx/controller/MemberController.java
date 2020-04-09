@@ -64,13 +64,13 @@ public class MemberController {
 
     @RequestMapping(value = "/addMemberRight",method = RequestMethod.POST)
     @ResponseBody
-    public Response<Integer> addMemberRight(@RequestBody MemberRightEntity entity){
+    public Response<Integer> addMemberRight(@RequestBody MemberEntity entity){
         return Response.ok(memberRightService.add(entity));
     }
 
     @RequestMapping(value = "/updateMemberRight",method = RequestMethod.POST)
     @ResponseBody
-    public Response<Integer> update(@RequestBody MemberRightEntity entity){
+    public Response<Integer> updateMemberRight(@RequestBody MemberEntity entity){
         CheckCondition.checkArgument(!StringUtils.isEmpty(entity.getId()), ErrorEnum.PARAM.getCode(),"id");
         return Response.ok(memberRightService.update(entity));
     }
