@@ -2,19 +2,19 @@ package com.project.cpx.service.impl;
 
 import com.project.cpx.common.util.DateUtil;
 import com.project.cpx.dao.OperationMapper;
-import com.project.cpx.entity.CommonBuilder;
-import com.project.cpx.entity.InventoryEntity;
-import com.project.cpx.entity.InventoryLogEntity;
-import com.project.cpx.entity.OperationEntity;
+import com.project.cpx.entity.*;
 import com.project.cpx.entity.dto.ProfitDTO;
 import com.project.cpx.entity.query.OperationQuery;
+import com.project.cpx.entity.query.PurchaseQuery;
 import com.project.cpx.service.InventoryService;
 import com.project.cpx.service.OperationService;
+import com.project.cpx.service.PurchaseService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,8 +32,25 @@ public class OperationServiceImpl implements OperationService {
     @Resource
     private InventoryService inventoryService;
 
+    @Resource
+    private PurchaseService purchaseService;
+
     @Override
     public int add(OperationEntity entity) {
+        entity.setSalePrice(null != entity.getSalePrice() ? entity.getSalePrice() : new BigDecimal(0));
+        entity.setSaleNum(null != entity.getSaleNum() ? entity.getSaleNum() : 0);
+        entity.setRebateNum(null != entity.getRebateNum() ? entity.getRebateNum() : 0);
+        if(null == entity.getPrice() && !StringUtils.isEmpty(entity.getProductCategory()) && !StringUtils.isEmpty(entity.getProductName())){
+            PurchaseQuery purchaseQuery = new PurchaseQuery();
+            purchaseQuery.setProductCategory(entity.getProductCategory());
+            purchaseQuery.setProductName(entity.getProductName());
+            List<PurchaseEntity> purchaseEntityList = purchaseService.query(purchaseQuery);
+            entity.setPrice(!CollectionUtils.isEmpty(purchaseEntityList) ? purchaseEntityList.get(0).getPrice() : null);
+        }
+        entity.setPrice(null != entity.getPrice() ? entity.getPrice() : new BigDecimal(0));
+        entity.setSaleTotalPrice(entity.getSalePrice().multiply(new BigDecimal(entity.getSaleNum())));
+        entity.setActualPrice(entity.getSaleTotalPrice().subtract(new BigDecimal(entity.getRebateNum())));
+        entity.setSalesRate(entity.getActualPrice().subtract(entity.getPrice()).intValue());
         Integer result = operationMapper.insertSelective(entity);
         if(result > 0){
             InventoryEntity inventoryEntity = CommonBuilder.buildInventoyByOperation(entity);
@@ -44,6 +61,20 @@ public class OperationServiceImpl implements OperationService {
 
     @Override
     public int update(OperationEntity entity) {
+        entity.setSalePrice(null != entity.getSalePrice() ? entity.getSalePrice() : new BigDecimal(0));
+        entity.setSaleNum(null != entity.getSaleNum() ? entity.getSaleNum() : 0);
+        entity.setRebateNum(null != entity.getRebateNum() ? entity.getRebateNum() : 0);
+        if(null == entity.getPrice() && !StringUtils.isEmpty(entity.getProductCategory()) && !StringUtils.isEmpty(entity.getProductName())){
+            PurchaseQuery purchaseQuery = new PurchaseQuery();
+            purchaseQuery.setProductCategory(entity.getProductCategory());
+            purchaseQuery.setProductName(entity.getProductName());
+            List<PurchaseEntity> purchaseEntityList = purchaseService.query(purchaseQuery);
+            entity.setPrice(!CollectionUtils.isEmpty(purchaseEntityList) ? purchaseEntityList.get(0).getPrice() : null);
+        }
+        entity.setPrice(null != entity.getPrice() ? entity.getPrice() : new BigDecimal(0));
+        entity.setSaleTotalPrice(entity.getSalePrice().multiply(new BigDecimal(entity.getSaleNum())));
+        entity.setActualPrice(entity.getSaleTotalPrice().subtract(new BigDecimal(entity.getRebateNum())));
+        entity.setSalesRate(entity.getActualPrice().subtract(entity.getPrice()).intValue());
         return operationMapper.updateByPrimaryKeySelective(entity);
     }
 
@@ -62,15 +93,35 @@ public class OperationServiceImpl implements OperationService {
             Integer count = operationMapper.queryCount(query);
             query.setTotalRecored(count);
         }
+        resultList.stream().forEach(operationEntity -> {
+            operationEntity.setSaleTotalPrice(operationEntity.getSalePrice().multiply(new BigDecimal(operationEntity.getSaleNum())));
+            operationEntity.setActualPrice(operationEntity.getSaleTotalPrice().subtract(new BigDecimal(operationEntity.getRebateNum())));
+            operationEntity.setSalesRate(operationEntity.getActualPrice().subtract(operationEntity.getPrice()).intValue());
+        });
         return  resultList;
     }
 
     @Override
     public List<ProfitDTO> queryByDate(OperationQuery query) {
-        if(null != query && StringUtils.isEmpty(query.getStart()) && StringUtils.isEmpty(query.getEnd())){
-            query.setStart(DateUtil.getMonthFirstDay()+" 00:00:00");
-            query.setEnd(DateUtil.getMonthLastDay()+" 23:59:59");
+        if(null != query && StringUtils.isEmpty(query.getMonth()) ){
+            query.setStart(DateUtil.getMonthFirstDay()+"");
+            query.setEnd(DateUtil.getMonthLastDay()+"");
+        }else{
+            Integer year = null;
+            Integer month = null;
+            try {
+                year = Integer.valueOf(query.getMonth().substring(0,4));
+                month = Integer.valueOf(query.getMonth().substring(5,7));
+            }catch (Exception e){
+                year= null;
+                month =null;
+            }
+            year = null ==year ? DateUtil.getDefaultYear() :year;
+            month = null ==month ? DateUtil.getDefaultMonth() :month;
+            query.setStart(DateUtil.getMonthFirstDayStr(year,month));
+            query.setEnd(DateUtil.getMonthLastDayStr(year,month));
         }
+
         List<ProfitDTO> resultList = operationMapper.queryByDate(query);
         if(CollectionUtils.isEmpty(resultList)){
             return new ArrayList<>();
@@ -80,4 +131,5 @@ public class OperationServiceImpl implements OperationService {
         }
         return resultList;
     }
+
 }

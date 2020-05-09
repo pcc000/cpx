@@ -36,6 +36,8 @@ public class PurchaseController {
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody
     public Response<Integer> add(@RequestBody PurchaseEntity entity){
+//        CheckCondition.checkArgument(!StringUtils.isEmpty(entity.getBelong()), ErrorEnum.PARAM.getCode(),"belong");
+        entity.setBelong(!StringUtils.isEmpty(entity.getBelong()) ? entity.getBelong() : "南翔店");
         entity.setOperateDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         return Response.ok(purchaseService.add(entity));
     }
@@ -58,6 +60,8 @@ public class PurchaseController {
     @RequestMapping(value = "/query",method = RequestMethod.GET)
     @ResponseBody
     public Response<List<PurchaseEntity>> query(PurchaseQuery entity){
+        entity.setStart(null != entity.getStart() ? entity.getStart().replace(" 00:00:00","") : null);
+        entity.setEnd(null != entity.getEnd() ? entity.getEnd().replace(" 00:00:00","").replace(" 23:59:59","") : null);
         return Response.ok(purchaseService.query(entity),entity);
     }
 

@@ -110,6 +110,7 @@ public class InventoryServiceImpl implements InventoryService {
         InventoryLogEntity log = CommonBuilder.addLog(entity);
         inventoryLogMapper.insertSelective(log);
         if(CollectionUtils.isEmpty(inventoryList)){
+            entity.setStockNum(-entity.getStockNum());
             inventoryMapper.insertSelective(entity);
         }else{
             InventoryEntity inventoryEntity = inventoryList.get(0);

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     public int add(PurchaseEntity entity) {
         int result = purchaseMapper.insertSelective(entity);
-        if(result >0){
+        if(result > 0){
             InventoryEntity inventoryEntity = CommonBuilder.buildInventoyByPurchase(entity);
             inventoryService.addInventory(inventoryEntity);
         }
@@ -57,7 +58,10 @@ public class PurchaseServiceImpl implements PurchaseService {
         if(null == query.getTotalRecored()){
             query.setTotalRecored(purchaseMapper.queryCount(query));
         }
-        return purchaseMapper.query(query);
+        resultList.stream().forEach(purchaseEntity -> {
+            purchaseEntity.setTotalPrice(purchaseEntity.getPrice().multiply(new BigDecimal(purchaseEntity.getNum())));
+        });
+        return resultList;
     }
 
     @Override

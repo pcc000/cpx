@@ -57,7 +57,6 @@ public class CpxFilter  implements Filter {
             return;
         }
         String sessionId = this.getSessionid(httpServletRequest);
-//        String sessionId = httpServletRequest.getHeader("sessionId");
         if(StringUtils.isEmpty(sessionId)){
             throw new CpxException(ErrorEnum.NOT_LOGIN.getCode(),ErrorEnum.NOT_LOGIN.getMsg());
         }

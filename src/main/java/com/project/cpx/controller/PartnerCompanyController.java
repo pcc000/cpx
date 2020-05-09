@@ -55,6 +55,8 @@ public class PartnerCompanyController {
     @RequestMapping(value = "/query",method = RequestMethod.GET)
     @ResponseBody
     public Response<List<PartnerCompanyEntity>> query(PartnerCompanyQuery query){
+        query.setStart(null != query.getStart() ? query.getStart().replace(" 00:00:00","") : null);
+        query.setEnd(null != query.getEnd() ? query.getEnd().replace(" 00:00:00","").replace(" 23:59:59","") : null);
         return Response.ok(partnerCompanyService.query(query),query);
     }
 }

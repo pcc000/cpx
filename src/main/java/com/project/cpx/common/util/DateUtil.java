@@ -28,6 +28,16 @@ public final class DateUtil {
         }
     }
 
+    public static Integer getDefaultYear(){
+        String re = format(new Date(),"yyyy");
+        return Integer.valueOf(re);
+    }
+
+    public static Integer getDefaultMonth(){
+        String re = format(new Date(),"MM");
+        return Integer.valueOf(re);
+    }
+
     public static final String getDate() {
         return format(new Date());
     }
@@ -404,6 +414,16 @@ public final class DateUtil {
         cal.add(2, 1);
         cal.add(5, -1);
         return cal.getTime();
+    }
+
+    public static String getMonthFirstDayStr(Integer year,Integer month){
+        Date d = getMonthFirstDay(year, month);
+        return format(d,"yyyy-MM-dd");
+    }
+
+    public static String getMonthLastDayStr(Integer year,Integer month){
+        Date d = getMonthLastDay(year, month);
+        return format(d,"yyyy-MM-dd");
     }
 
     public static String getMonthFirstDay(){

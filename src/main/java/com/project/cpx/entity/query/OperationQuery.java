@@ -57,6 +57,26 @@ public class OperationQuery  extends BaseQuery {
 
     private String carOwnerPhone;
 
+    private String month;
+
+    private Integer year;
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
     public String getOperateDate() {
         return operateDate;
     }

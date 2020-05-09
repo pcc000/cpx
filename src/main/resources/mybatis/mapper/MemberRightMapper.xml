@@ -46,9 +46,6 @@
   <insert id="insertSelective" parameterType="com.project.cpx.entity.MemberRightEntity" >
     insert into member_right
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="memberId != null" >
         member_id,
       </if>
@@ -78,9 +75,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="memberId != null" >
         #{memberId,jdbcType=INTEGER},
       </if>

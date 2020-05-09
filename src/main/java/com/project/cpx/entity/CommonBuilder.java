@@ -56,8 +56,8 @@ public class CommonBuilder {
         query.setBelong(entity.getBelong());
         query.setProductCategory(entity.getProductCategory());
         query.setProductName(entity.getProductName());
-        query.setPrice(entity.getPrice());
-        query.setCarType(entity.getCarType());
+//        query.setPrice(entity.getPrice());
+//        query.setCarType(entity.getCarType());
         return query;
     }
 
